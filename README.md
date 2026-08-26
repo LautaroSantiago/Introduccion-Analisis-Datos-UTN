@@ -107,7 +107,18 @@ Python, R, SQL, Cassandra, Pandas.
 
 **Teorema central del límite** (desarrollado entre los siglos XVIII y XIX, reformulado hasta el s. XX): dada una población con cualquier distribución, la distribución de las medias muestrales tiende a una distribución normal a medida que aumenta el tamaño de la muestra, siempre que la varianza poblacional sea finita.
 - Permite, conociendo las propiedades de la distribución normal, testear si una diferencia observada entre dos grupos (ej. rendimiento de dos semillas, una original y una modificada genéticamente) es significativa o no.
-- Pendiente de investigar (consigna del profesor): la relación entre el teorema central del límite y el **test de hipótesis**.
+
+**Relación entre el teorema central del límite y el test de hipótesis** (consigna del profesor):
+
+El test de hipótesis necesita saber qué forma tiene la distribución de un estadístico (por ejemplo, la media muestral) para poder calcular probabilidades y decidir si un resultado es "raro" o no. El TCL es lo que garantiza esa forma: dice que, sin importar cómo se distribuya la población original, la distribución de las medias muestrales se aproxima a una normal a medida que crece el tamaño de la muestra (n).
+
+Eso es lo que habilita todo el mecanismo del test de hipótesis:
+1. Se plantea una **hipótesis nula (H₀)** (ej: "las dos semillas rinden igual").
+2. Gracias al TCL, se sabe que la media muestral sigue (aproximadamente) una distribución normal, con lo cual se puede calcular su desvío estándar (error estándar) y ubicar el resultado observado dentro de esa curva.
+3. Se calcula qué tan probable es obtener la diferencia observada (o una más extrema) **si H₀ fuera cierta** — esto es el p-valor.
+4. Si esa probabilidad es muy baja (por debajo de un umbral, típicamente 0.05), se **rechaza H₀**: la diferencia es estadísticamente significativa y no se explica solo por azar muestral.
+
+En el ejemplo de las semillas: no alcanza con comparar dos medias "a ojo" (semilla azul vs. naranja). El TCL permite construir la distribución esperada de esas medias bajo el supuesto de que no hay diferencia real, y sobre esa distribución normal se aplica el test para decidir si la diferencia observada es lo bastante grande como para no ser producto del azar. Sin el TCL no habría base teórica para saber qué distribución usar ni cómo calcular esas probabilidades — por eso es el fundamento estadístico detrás de la mayoría de los test de hipótesis paramétricos (test t, test z, ANOVA, etc.).
 
 ---
 
