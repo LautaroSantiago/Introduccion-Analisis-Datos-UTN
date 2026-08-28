@@ -39,8 +39,6 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
 - [<font color="#9A6700"><strong>🟣 4/12 · Recuperatorio TP final</strong></font>](#eval-4-12)
 - [<font color="#1A7F37"><strong>🟢 11/12 · Instancia de finales y última instancia de recuperatorio</strong></font>](#eval-11-12)
 
-> *Nota: en el índice figuran las clases 3, 4, 5 y 6 con su fecha en el cronograma más abajo; se suman aquí a medida que tienen contenido desarrollado.*
-
 ---
 
 ## <a id="funcionamiento"></a><font color="#8250DF">🗓️ Funcionamiento de la materia</font>
@@ -53,8 +51,6 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
 - **Asistencia:** se exige 75% (máximo 3 faltas en el cuatrimestre).
 - **Regularidad:** 4 o más en ambos parciales.
 - **Aprobación:** 6 o más en ambos parciales, o final en caso de no lograrlo.
-
-> **A tener en cuenta:** quienes no lleguen a regularizar (menos de 4 en algún parcial) pueden presentarse el 11/12 a un examen integrador para regularizar, con nota máxima 4.
 
 ### <a id="funcionamiento-examenes"></a><font color="#1A7F37">Exámenes</font>
 
