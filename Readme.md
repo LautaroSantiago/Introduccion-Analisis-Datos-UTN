@@ -64,30 +64,130 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
 
 ### <a id="funcionamiento-cronograma"></a><font color="#1A7F37">Cronograma de clases</font>
 
-<details>
-<summary><font color="#1A7F37">Ver cronograma completo (16 clases)</font></summary>
+Cada clase se despliega individualmente. Contenido actualizado a medida que avanza la cursada — las que todavía no tienen desarrollo dicen *"pendiente"*.
 
-| Clase | Fecha | Tema |
-|---|---|---|
-| 1 | 21/8 | Conceptos básicos |
-| 2 | 28/8 | Numpy |
-| 3 | 4/9 | Pandas |
-| 4 | 11/9 | Data cleaning |
-| 5 | 18/9 | Análisis exploratorio de datos y estadística descriptiva |
-| 6 | 25/9 | Visualización de datos |
-| — | 2/10 | **Primer parcial teórico** |
-| 7 | 9/10 | Análisis de datos con R |
-| — | 16/10 | **Recuperatorio primer parcial** |
-| 8 | 23/10 | Integración de fuentes / SQL con pandas / Cassandra |
-| 9 | 30/10 | Conceptos básicos del modelado de datos |
-| 10 | 6/11 | Modelos de clasificación |
-| 11 | 13/11 | Modelos de regresión |
-| 12 | 20/11 | Modelos de clustering |
-| — | 27/11 | **Defensa TP final** |
-| — | 4/12 | **Recuperatorio TP final** |
-| — | 11/12 | **Instancia de finales y última instancia de recuperatorio** |
+<details>
+<summary><font color="#1A7F37">Clase 1 — 21/8 · Conceptos básicos</font></summary>
+
+Desarrollo completo en la sección [📅 Clase 1](#clase-1) de este README.
 
 </details>
+
+<details>
+<summary><font color="#1A7F37">Clase 2 — 28/8 · Numpy</font></summary>
+
+*Pendiente — se actualiza cuando se dicte la clase.*
+
+</details>
+
+<details>
+<summary><font color="#1A7F37">Clase 3 — 4/9 · Pandas</font></summary>
+
+*Pendiente.*
+
+</details>
+
+<details>
+<summary><font color="#1A7F37">Clase 4 — 11/9 · Data cleaning</font></summary>
+
+*Pendiente.*
+
+</details>
+
+<details>
+<summary><font color="#1A7F37">Clase 5 — 18/9 · Análisis exploratorio de datos y estadística descriptiva</font></summary>
+
+*Pendiente.*
+
+</details>
+
+<details>
+<summary><font color="#1A7F37">Clase 6 — 25/9 · Visualización de datos</font></summary>
+
+*Pendiente.*
+
+</details>
+
+<details>
+<summary><font color="#9A6700">🟣 2/10 · Primer parcial teórico</font></summary>
+
+**Fecha evaluatoria.** Primer parcial: teórico y virtual.
+
+</details>
+
+<details>
+<summary><font color="#1A7F37">Clase 7 — 9/10 · Análisis de datos con R</font></summary>
+
+*Pendiente.*
+
+</details>
+
+<details>
+<summary><font color="#9A6700">🟣 16/10 · Recuperatorio primer parcial</font></summary>
+
+**Fecha evaluatoria.**
+
+</details>
+
+<details>
+<summary><font color="#1A7F37">Clase 8 — 23/10 · Integración de fuentes / SQL con pandas / Cassandra</font></summary>
+
+*Pendiente.*
+
+</details>
+
+<details>
+<summary><font color="#1A7F37">Clase 9 — 30/10 · Conceptos básicos del modelado de datos</font></summary>
+
+*Pendiente.*
+
+</details>
+
+<details>
+<summary><font color="#1A7F37">Clase 10 — 6/11 · Modelos de clasificación</font></summary>
+
+*Pendiente.*
+
+</details>
+
+<details>
+<summary><font color="#1A7F37">Clase 11 — 13/11 · Modelos de regresión</font></summary>
+
+*Pendiente.*
+
+</details>
+
+<details>
+<summary><font color="#1A7F37">Clase 12 — 20/11 · Modelos de clustering</font></summary>
+
+*Pendiente.*
+
+</details>
+
+<details>
+<summary><font color="#9A6700">🟣 27/11 · Defensa TP final</font></summary>
+
+**Fecha evaluatoria.** Segundo parcial: defensa del trabajo práctico final (informe con bases de la Encuesta Permanente de Hogares — INDEC).
+
+</details>
+
+<details>
+<summary><font color="#9A6700">🟣 4/12 · Recuperatorio TP final</font></summary>
+
+**Fecha evaluatoria.**
+
+</details>
+
+<details>
+<summary><font color="#1A7F37">🟢 11/12 · Instancia de finales y última instancia de recuperatorio</font></summary>
+
+**Fecha evaluatoria.** Examen integrador para quienes no llegaron a regularizar (nota máxima 4), y última instancia de finales.
+
+</details>
+
+<p align="center">
+  <img src="./Material/cronograma.png" alt="Cronograma de clases" width="600">
+</p>
 
 ### <a id="funcionamiento-bibliografia"></a><font color="#1A7F37">Bibliografía</font>
 
