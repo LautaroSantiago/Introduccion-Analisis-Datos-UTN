@@ -274,7 +274,9 @@ Eso es lo que habilita todo el mecanismo del test de hipótesis:
 </details>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/master/Material/cronograma.png" alt="Cronograma de clases" width="600">
+
+[![Ver Cronograma](https://img.shields.io/badge/🖼️_Ver_Cronograma-Cronograma_de_clases-0A66C2?style=for-the-badge)](https://raw.githubusercontent.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/master/Material/cronograma.png)
+
 </p>
 
 ### <a id="funcionamiento-bibliografia"></a><font color="#1A7F37">Bibliografía</font>
