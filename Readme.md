@@ -33,7 +33,7 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
   - [<font color="#1A7F37">Teorema central del límite</font>](#clase-1-teorema-central-limite)
   - [<font color="#9A6700">Relación entre el TCL y el test de hipótesis</font>](#clase-1-tcl-test-hipotesis)
   - [<font color="#1A7F37">Notas de la clase</font>](#clase-1-notas)
-- [<font color="#8250DF"><strong>Clase 2 — 28/8 · Numpy y primer acercamiento a Pandas</strong></font>](#clase-2)
+- [<font color="#8250DF"><strong>Clase 2 — 4/9 · Numpy y Pandas</strong></font>](#clase-2)
   - [<font color="#1A7F37">¿Por qué estudiar Numpy?</font>](#clase-2-motivacion)
   - [<font color="#1A7F37">Qué es Numpy y características generales</font>](#clase-2-definicion)
   - [<font color="#1A7F37">La clase `ndarray`</font>](#clase-2-ndarray)
@@ -43,7 +43,9 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
   - [<font color="#1A7F37">Imágenes como matrices</font>](#clase-2-imagenes)
   - [<font color="#1A7F37">Introducción a Pandas</font>](#clase-2-pandas-intro)
   - [<font color="#1A7F37">Series y DataFrames</font>](#clase-2-series-dataframes)
-  - [<font color="#1A7F37">Indexado y filtrado</font>](#clase-2-indexado)
+  - [<font color="#1A7F37">Selección de columnas, filtrado de filas e índices</font>](#clase-2-indexado)
+  - [<font color="#1A7F37">Procesamiento de fechas y texto</font>](#clase-2-fechas-texto)
+  - [<font color="#1A7F37">Ejercicio de la clase</font>](#clase-2-ejercicio)
   - [<font color="#1A7F37">Notas de la clase</font>](#clase-2-notas)
 - [<font color="#9A6700"><strong>🟣 2/10 · Primer parcial teórico</strong></font>](#eval-2-10)
 - [<font color="#8250DF"><strong>Clase 7 — 9/10 · Análisis de datos con R</strong></font>](#clase-7) *(pendiente)*
@@ -61,7 +63,7 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
 
 ## <a id="funcionamiento"></a><font color="#8250DF">🗓️ Funcionamiento de la materia</font>
 
-[![Ver PDF](https://img.shields.io/badge/📄_Ver_PDF-Funcionamiento_de_la_materia-0A66C2?style=for-the-badge)](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/master/Material/0%20-%20Funcionamiento.pdf)
+[![Ver PDF](https://img.shields.io/badge/📄_Ver_PDF-Funcionamiento_de_la_materia-0A66C2?style=for-the-badge)](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/master/Material/00%20-%20Funcionamiento.pdf)
 
 ### <a id="funcionamiento-modalidad"></a><font color="#1A7F37">Modalidad y criterios de evaluación</font>
 
@@ -88,7 +90,7 @@ Cada clase se despliega individualmente con su desarrollo completo adentro. Se v
 <details>
 <summary><a id="clase-1"></a><font color="#1A7F37"><strong>Clase 1 — 21/8 · Conceptos fundamentales del análisis de datos</strong></font></summary>
 
-[![Ver PDF](https://img.shields.io/badge/📄_Ver_PDF-Clase_1-0A66C2?style=for-the-badge)](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/master/Material/1%20-%20Clase%201.pdf)
+[![Ver PDF](https://img.shields.io/badge/📄_Ver_PDF-Clase_1-0A66C2?style=for-the-badge)](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/master/Material/01%20-%20Clase%201.pdf)
 
 #### <a id="clase-1-dato"></a><font color="#1A7F37">Dato y tipos de datos</font>
 
@@ -197,7 +199,11 @@ Eso es lo que habilita todo el mecanismo del test de hipótesis:
 </details>
 
 <details>
-<summary><a id="clase-2"></a><font color="#1A7F37"><strong>Clase 2 — 28/8 · Numpy y primer acercamiento a Pandas</strong></font></summary>
+<summary><a id="clase-2"></a><font color="#1A7F37"><strong>Clase 2 — 4/9 · Numpy y Pandas</strong></font></summary>
+
+[![Ver PDF](https://img.shields.io/badge/📄_Ver_PDF-Clase_2_NumPy-0A66C2?style=for-the-badge)](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/master/Material/02%20-%20Clase%202%20NumPy.pdf)
+[![Ver PDF](https://img.shields.io/badge/📄_Ver_PDF-Clase_2_Pandas-0A66C2?style=for-the-badge)](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/master/Material/02%20-%20Clase%202%20Pandas.pdf)
+[![Ver PDF](https://img.shields.io/badge/📝_Ver_PDF-Ejercicios_Clase_2-6E40C9?style=for-the-badge)](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/master/Ejercicios/02%20-%20Ejercicios%20Clase%202-1.pdf)
 
 #### <a id="clase-2-motivacion"></a><font color="#1A7F37">¿Por qué estudiar Numpy?</font>
 
@@ -232,24 +238,33 @@ A diferencia de las **listas de Python** (mutables, de tamaño variable, capaces
 
 #### <a id="clase-2-funciones"></a><font color="#1A7F37">Funciones y atributos principales</font>
 
-**Algunas funciones útiles:**
-- Creación de vectores: de ceros, de unos, con valores aleatorios.
-- `arange`: una adaptación de `range` que además permite trabajar con decimales.
-- `linspace`: crea un array con intervalos regulares.
-- `sort`: ordenamiento de vectores.
-- `concatenate`: une arrays, permitiendo también agregar dimensiones.
-- `flatten`: transforma una matriz en un vector de una sola dimensión — trabajar en una dimensión suele ser más veloz que en varias, por eso muchos algoritmos de IA aplanan una matriz antes de procesarla.
-- `reshape`: permite modificar la forma de un array sin generar un uso excesivo de memoria.
-- Funciones matemáticas: suma, media, desvío estándar, etc.
+**Funciones para crear arrays** *(según diapositivas de la Unidad 2)*:
+- `zeros()`: crea un array de ceros; recibe por parámetro la cantidad de elementos.
+- `ones()`: crea un array de unos; recibe por parámetro la cantidad de elementos.
+- `empty()`: crea un array con valores aleatorios.
+- `arange()`: adaptación de `range()` a Numpy — se diferencia en que permite trabajar con decimales.
+- `linspace()`: crea un array con intervalos regulares.
+- `sort()`: ordena un vector (ascendente por defecto).
+- `concatenate()`: concatena dos arrays.
+- `expand_dims()`: agrega dimensiones a un array.
+- Y muchas más.
+
+**Métodos del `ndarray`:**
+- `flatten()`: transforma el array a una sola dimensión — trabajar en una dimensión suele ser más veloz que en varias, por eso muchos algoritmos de IA aplanan una matriz antes de procesarla.
+- `reshape()`: cambia la forma (shape) de un array sin generar un uso excesivo de memoria.
+- `sum()`: devuelve la suma de los elementos.
+- `mean()`: estima la media.
+- `std()`: estima el desvío estándar.
+- Y muchos más.
 
 **Atributos del `ndarray`:**
 - `ndim`: número de dimensiones.
 - `shape`: tupla con la cantidad de elementos en cada dimensión.
-- `dtype`: tipo de dato de los elementos.
+- `dtype`: tipo de dato que contiene.
 - `size`: cantidad total de elementos.
-- `itemsize`: tamaño en bytes de cada elemento.
-- `data` / buffer: acceso a los elementos de la matriz.
-- `T`: la transpuesta de la matriz.
+- `itemsize`: tamaño en bytes de cada elemento del array.
+- `data`: el buffer que contiene los elementos de la matriz.
+- `T`: la transpuesta del array.
 
 #### <a id="clase-2-ecosistema"></a><font color="#1A7F37">Ecosistema: dónde se usa Numpy</font>
 
@@ -281,49 +296,85 @@ Una imagen en blanco y negro puede representarse con una sola matriz (cada valor
 
 #### <a id="clase-2-pandas-intro"></a><font color="#1A7F37">Introducción a Pandas</font>
 
-**Pandas** está orientada al trabajo con **datos estructurados** (tablas — a diferencia de los no estructurados como imágenes o lenguaje, y los semiestructurados vistos en la Clase 1). Fue desarrollada por **Wes McKinney** (autor del libro de bibliografía obligatoria *Python para análisis de datos*), buscando imitar funcionalidades de un lenguaje preexistente: **R**.
+**Pandas** está orientada al trabajo con **datos estructurados** (tablas — a diferencia de los no estructurados como imágenes o lenguaje, y los semiestructurados vistos en la Clase 1). Fue desarrollada inicialmente en **2008** por **Wes McKinney** (autor del libro de bibliografía obligatoria *Python para análisis de datos*), buscando imitar funcionalidades de un lenguaje preexistente: **R**.
 
-Características:
-- Código abierto y multiplataforma.
+Características *(según diapositivas de la Unidad 2)*:
+- Código abierto.
+- Multiplataforma.
 - Optimizada con altos estándares de calidad, ya que internamente utiliza Numpy para el procesamiento de las variables numéricas de las tablas.
-- Sintaxis de alto nivel, como el resto de Python.
-- Permite leer y guardar datos tabulares en distintos formatos: CSV, Excel, JSON, entre otros.
-- A diferencia de Numpy (pensado sobre todo para números), permite trabajar con variables ordinales, de fecha, de texto, y realizar uniones entre tablas.
+- Sintaxis de alto nivel.
+
+**Funciones más utilizadas de Pandas:**
+- `read_csv()`: permite abrir un CSV.
+- `read_excel()`: permite abrir un Excel.
+- `read_json()`: permite cargar un JSON.
+- `DataFrame()`: crea un DataFrame.
+- `to_datetime()`: convierte una columna a formato fecha.
+- `merge()`: une dos tablas.
 
 #### <a id="clase-2-series-dataframes"></a><font color="#1A7F37">Series y DataFrames</font>
 
 Pandas se apoya en dos estructuras de datos básicas:
 
-- **Series:** vectores unidimensionales con etiquetas. En la práctica son dos vectores corriendo en paralelo — uno de **valores** (que internamente usa la clase `ndarray` de Numpy) y otro de **índices/etiquetas** (de un tipo propio de Pandas, no de Numpy). Comparten la mayoría de los atributos de `ndarray` (`shape`, `dtype`, `size`, etc.), pero no incluyen métodos como `flatten` o `reshape`, porque no tendría sentido "aplanar" algo que necesariamente mantiene valores y etiquetas asociados en paralelo, ni mezclar en una misma estructura columnas de distinto tipo de dato.
-- **DataFrames:** estructuras bidimensionales construidas sobre la base de las series (equivalen a una tabla completa, con varias columnas).
-
-Pandas suma funciones propias para exploración, manipulación y transformación de datos: `head` (primeros elementos), `describe` (medidas de tendencia central y estadísticas descriptivas), eliminación de valores nulos, `apply` (aplicar una función a cada elemento), `info` (resumen del contenido del DataFrame), agrupamientos, y métodos para exportar a CSV/Excel, entre otros.
+- **Series:** vectores unidimensionales **etiquetados** que contienen datos de cualquier tipo. Están basadas en `ndarray`.
+  - *Atributos:* `index` (índices del objeto), `values` (valores del objeto), `name` (nombre opcional de la serie), `is_unique` (`True`/`False` según si los valores son únicos). Poseen la mayoría de los atributos de `ndarray`, **excepto** `data`, `itemsize` y `strides`.
+  - *Métodos:* poseen la mayoría de los métodos de `ndarray` (**excepto** `flatten()` y `reshape()` — no tendría sentido "aplanar" algo que necesariamente mantiene valores y etiquetas asociadas en paralelo) y suman funciones propias: `head()` (primeros *n* elementos), `describe()` (medidas de tendencia central y estadísticas descriptivas), `dropna()` (elimina valores nulos), `apply()` (aplica una función a cada elemento).
+- **DataFrames:** estructura de datos **bidimensional**, construida sobre la base de las series, que puede contener tanto arrays de dos dimensiones como tablas con filas y columnas.
+  - *Atributos:* `shape` (cantidad de filas y columnas), `columns` (nombre de las columnas), `dtypes` (tipo de dato de cada columna).
+  - *Métodos:* `to_csv()` / `to_excel()` (guardan el DataFrame en esos formatos), `head()` (primeras filas), `info()` (resumen de qué contiene el DataFrame), `groupby()` (agrupa según una columna recibida por parámetro).
 
 > **Ojo con esto:** en un DataFrame, el tipo de dato (`dtype`) que se reporta por columna corresponde al tipo de los **valores**, no al de las etiquetas/índice.
 
-#### <a id="clase-2-indexado"></a><font color="#1A7F37">Indexado y filtrado</font>
+#### <a id="clase-2-indexado"></a><font color="#1A7F37">Selección de columnas, filtrado de filas e índices</font>
 
-El **índice** es una de las características más importantes de Pandas: permite filtrar y quedarse solo con los elementos relevantes para el análisis que se esté haciendo (por ejemplo, quedarse únicamente con registros de una zona geográfica puntual, descartando el resto).
+El **índice** es una de las características más importantes de Pandas: permite filtrar y quedarse solo con los elementos relevantes para el análisis que se esté haciendo.
 
-Formas de seleccionar datos, ejemplificadas en clase con un dataset de personajes de un videojuego:
-- **Por columnas:** por nombre (entre corchetes o con notación de punto) o por posición, usando `iloc`.
-- **Por filas:** por posición con `iloc` (siempre fila a la izquierda, columna a la derecha), o mediante *queries* de estilo SQL para filtrar filas según una condición (por ejemplo, quedarse con los registros que superen cierto valor en un atributo).
+**Selección de columnas:**
+| Por nombre | Por posición |
+|---|---|
+| `df.id` o `df["id"]` — selecciona la columna "id" del DataFrame `df` | `df.iloc[:, 1]` — selecciona la primera columna |
+| `df[["id", "damage"]]` — selecciona las columnas "id" y "damage" | `df.iloc[:, 1:4]` — selecciona las primeras tres columnas |
+
+**Filtrado de filas:**
+| Por posición | Según condiciones |
+|---|---|
+| `df.iloc[2, :]` — retorna todas las columnas de la fila 2 | `df.loc[df.damage == 3, ["id", "damage"]]` — columnas "id" y "damage" de las filas donde `damage` sea 3 |
+| | `df.query("damage > 2")` — filas donde `damage` sea mayor a 2 |
+
+**Cómo funcionan los índices:** son mecanismos para simplificar el acceso a los datos. Los DataFrames tienen un atributo `index` que se puede setear o consultar. Tanto `loc` como `iloc` permiten acceder a distintas posiciones del DataFrame: **`loc` utiliza los nombres** de filas y columnas, mientras que **`iloc` utiliza posiciones numéricas**.
+
+Ejemplificado en clase con un dataset de personajes de un videojuego, filtrando por nivel de daño (`damage`).
+
+#### <a id="clase-2-fechas-texto"></a><font color="#1A7F37">Procesamiento de fechas y texto</font>
+
+- **Fechas:** con `to_datetime()` se puede transformar una columna a formato fecha, y luego, mediante el accesor `dt`, acceder al año, mes o día.
+- **Texto:** mediante el accesor `str` se puede trabajar con cadenas de texto en vectores, aplicando funciones como `lower()`, `upper()`, `split()`, `replace()`, entre otras *(la diapositiva original también menciona una función `splice()`, que probablemente sea un error tipográfico por `strip()`)*.
 
 **Datasets para practicar:** se mencionó **Kaggle** como una de las plataformas de referencia de la comunidad de ciencia de datos e IA, con cientos de miles de datasets públicos, notebooks y modelos preentrenados disponibles para descargar (incluye una librería propia, `kagglehub`, para acceder a ellos vía API).
 
+#### <a id="clase-2-ejercicio"></a><font color="#1A7F37">Ejercicio de la clase</font>
+
+Consigna del PDF de ejercicios:
+1. Abrir con Pandas la base de microdatos de la Encuesta Permanente de Hogares (EPH) del tercer trimestre de 2024. Descarga: [EPH_usu_3_Trim_2024_txt.zip](https://www.indec.gob.ar/ftp/cuadros/menusuperior/eph/EPH_usu_3_Trim_2024_txt.zip)
+2. Analizar el DataFrame y responder: ¿cuántas columnas tiene? ¿cuántas filas tiene? ¿qué tipos de columnas tiene?
+3. ¿Se puede detectar alguna columna índice?
+
+> El zip descargado (con `usu_hogar_T324.txt` y `usu_individual_T324.txt`) se guarda en el repositorio dentro de `Ejercicios/EPH_usu_3_Trim_2024_txt/`.
+
 #### <a id="clase-2-notas"></a><font color="#1A7F37">Notas de la clase</font>
 
+- El 28/8 no hubo clase — por eso Numpy y Pandas (originalmente repartidos en dos fechas del cronograma) se dieron juntos en una sola clase, el 4/9.
 - La clase se dio en dos partes, con material y ejercicios compartidos vía Google Colab.
 - Recomendación: dedicar aunque sea media hora por semana a los ejercicios de la materia ayuda a llegar mejor preparado a los parciales y al trabajo práctico final, sin necesidad de grandes bloques de tiempo.
 - Los ejercicios de cada clase quedan disponibles en la sección de materiales del campus; se retoman al principio de la clase siguiente.
-- El ejercicio de esta clase consistía en empezar a observar el dataset con el que se va a trabajar en el trabajo práctico final de fin de cuatrimestre.
+- El ejercicio de esta clase consistía en empezar a observar el dataset con el que se va a trabajar en el trabajo práctico final de fin de cuatrimestre (ver arriba).
 
 </details>
 
 <details>
 <summary><font color="#1A7F37">Clase 3 — 4/9 · Pandas</font></summary>
 
-*Pendiente.*
+*El contenido de Pandas ya quedó cubierto en la [Clase 2](#clase-2), dictada el 4/9 junto con Numpy (no hubo clase el 28/8). Esta fecha del cronograma original queda documentada arriba.*
 
 </details>
 
@@ -452,10 +503,18 @@ Formas de seleccionar datos, ejemplificadas en clase con un dataset de personaje
 
 ```
 Introducción al Análisis de Datos
+├── Ejercicios
+│   ├── 02 - Ejercicios Clase 2-1.pdf
+│   └── EPH_usu_3_Trim_2024_txt
+│       ├── usu_hogar_T324.txt
+│       └── usu_individual_T324.txt
 ├── Material
-│   ├── 0 - Funcionamiento.pdf
-│   └── 1 - Clase 1.pdf
-└── README.md
+│   ├── 00 - Funcionamiento.pdf
+│   ├── 01 - Clase 1.pdf
+│   ├── 02 - Clase 2 NumPy.pdf
+│   ├── 02 - Clase 2 Pandas.pdf
+│   └── cronograma.png
+└── Readme.md
 ```
 
-Cada nueva clase se agrega a `Material/` numerada en orden (`2 - Clase 2.pdf`, `3 - Clase 3.pdf`, ...).
+Cada nueva clase se agrega a `Material/` numerada en orden (`03 - Clase 3.pdf`, `04 - Clase 4.pdf`, ...), y sus ejercicios (si los hay) a `Ejercicios/` con el mismo criterio de numeración.
