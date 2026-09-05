@@ -4,6 +4,12 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
 
 **Cursada:** 2do. cuatrimestre 2026
 
+<p align="center">
+
+[![Abrir en Colab](https://img.shields.io/badge/📓_Google_Colab-Acceso_directo-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white)](https://colab.research.google.com/drive/1x-5Rp6Erfq18CL7-0ANoI4189KSpoTMt?usp=sharing)
+
+</p>
+
 ---
 
 ## <font color="#8250DF">🧭 Índice</font>
@@ -26,7 +32,18 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
   - [<font color="#1A7F37">Teorema central del límite</font>](#clase-1-teorema-central-limite)
   - [<font color="#9A6700">Relación entre el TCL y el test de hipótesis</font>](#clase-1-tcl-test-hipotesis)
   - [<font color="#1A7F37">Notas de la clase</font>](#clase-1-notas)
-- [<font color="#8250DF"><strong>Clase 2 — 28/8 · Numpy</strong></font>](#clase-2) *(pendiente)*
+- [<font color="#8250DF"><strong>Clase 2 — 28/8 · Numpy y primer acercamiento a Pandas</strong></font>](#clase-2)
+  - [<font color="#1A7F37">¿Por qué estudiar Numpy?</font>](#clase-2-motivacion)
+  - [<font color="#1A7F37">Qué es Numpy y características generales</font>](#clase-2-definicion)
+  - [<font color="#1A7F37">La clase `ndarray`</font>](#clase-2-ndarray)
+  - [<font color="#1A7F37">Funciones y atributos principales</font>](#clase-2-funciones)
+  - [<font color="#1A7F37">Ecosistema: dónde se usa Numpy</font>](#clase-2-ecosistema)
+  - [<font color="#9A6700">Experimento en clase: listas vs. Numpy</font>](#clase-2-experimento)
+  - [<font color="#1A7F37">Imágenes como matrices</font>](#clase-2-imagenes)
+  - [<font color="#1A7F37">Introducción a Pandas</font>](#clase-2-pandas-intro)
+  - [<font color="#1A7F37">Series y DataFrames</font>](#clase-2-series-dataframes)
+  - [<font color="#1A7F37">Indexado y filtrado</font>](#clase-2-indexado)
+  - [<font color="#1A7F37">Notas de la clase</font>](#clase-2-notas)
 - [<font color="#9A6700"><strong>🟣 2/10 · Primer parcial teórico</strong></font>](#eval-2-10)
 - [<font color="#8250DF"><strong>Clase 7 — 9/10 · Análisis de datos con R</strong></font>](#clase-7) *(pendiente)*
 - [<font color="#9A6700"><strong>🟣 16/10 · Recuperatorio primer parcial</strong></font>](#eval-16-10)
@@ -162,9 +179,122 @@ Eso es lo que habilita todo el mecanismo del test de hipótesis:
 </details>
 
 <details>
-<summary><a id="clase-2"></a><font color="#1A7F37"><strong>Clase 2 — 28/8 · Numpy</strong></font></summary>
+<summary><a id="clase-2"></a><font color="#1A7F37"><strong>Clase 2 — 28/8 · Numpy y primer acercamiento a Pandas</strong></font></summary>
 
-*Pendiente — se actualiza cuando se dicte la clase.*
+#### <a id="clase-2-motivacion"></a><font color="#1A7F37">¿Por qué estudiar Numpy?</font>
+
+La clase retoma la Clase 1: el crecimiento exponencial del volumen de datos disponibles en la web (desde los años 90) generó la necesidad de desarrollar tanto tecnologías como herramientas estadísticas para procesarlos. Esta clase se centra en el eje tecnológico: qué hizo que **Python** se expandiera hasta convertirse en el lenguaje hegemónico del análisis de datos y la inteligencia artificial.
+
+Numpy no es una librería que se use de forma directa y permanente en el trabajo práctico final (para eso está Pandas, que se construye sobre ella), pero entender su funcionamiento explica gran parte de por qué Python llegó a ser tan popular en este campo.
+
+#### <a id="clase-2-definicion"></a><font color="#1A7F37">Qué es Numpy y características generales</font>
+
+**Numpy** (*Numerical Python*) sirve para la manipulación eficiente de vectores. Aunque su nombre remite al procesamiento de números, sus características van más allá de solo trabajar con variables cuantitativas: apuntan a optimizar cualquier procedimiento que involucre datos numéricos.
+
+Características principales:
+- Está **desarrollada en C** (no en Python), un lenguaje de bajo nivel, tipado y compilado, que permite un acceso mucho más preciso y directo a la memoria — algo que Python, al ser de alto nivel, no ofrece por sí mismo.
+- Está orientada al trabajo con **arrays multidimensionales** y grandes volúmenes de información.
+- Es de código abierto y multiplataforma.
+- Está optimizada con altos estándares de calidad, lo que da como resultado dos ventajas centrales: **mayor velocidad de procesamiento** y **menor uso de memoria**.
+
+Python se diseñó priorizando la legibilidad por sobre la optimización (el programador pasa más tiempo leyendo código que escribiéndolo). Numpy funciona como un "parche" que compensa esa falta de optimización en el trabajo con datos numéricos, combinando lo mejor de dos mundos: la legibilidad de un lenguaje de alto nivel y el rendimiento de uno de bajo nivel como C.
+
+#### <a id="clase-2-ndarray"></a><font color="#1A7F37">La clase `ndarray`</font>
+
+Es la clase fundamental de Numpy — base de todas las operaciones matemáticas y numéricas que ofrece la librería.
+
+A diferencia de las **listas de Python** (mutables, de tamaño variable, capaces de mezclar tipos de datos en distintas posiciones, lo que obliga a reservar y gestionar memoria de forma poco eficiente), un `ndarray`:
+- Se crea con un **tamaño fijo** desde su instanciación, con espacios de memoria contiguos reservados.
+- Exige que **todos sus elementos sean del mismo tipo**. La excepción es un vector de objetos, que sí permite mezclar tamaños o tipos distintos, aunque a costa de perder parte de la optimización.
+- Al tener tamaño y tipo fijos, permite reservar en memoria exactamente el espacio necesario, sin desperdicio — lo cual acelera notablemente las operaciones matemáticas y algebraicas sobre grandes volúmenes de datos.
+
+#### <a id="clase-2-funciones"></a><font color="#1A7F37">Funciones y atributos principales</font>
+
+**Algunas funciones útiles:**
+- Creación de vectores: de ceros, de unos, con valores aleatorios.
+- `arange`: una adaptación de `range` que además permite trabajar con decimales.
+- `linspace`: crea un array con intervalos regulares.
+- `sort`: ordenamiento de vectores.
+- `concatenate`: une arrays, permitiendo también agregar dimensiones.
+- `flatten`: transforma una matriz en un vector de una sola dimensión — trabajar en una dimensión suele ser más veloz que en varias, por eso muchos algoritmos de IA aplanan una matriz antes de procesarla.
+- `reshape`: permite modificar la forma de un array sin generar un uso excesivo de memoria.
+- Funciones matemáticas: suma, media, desvío estándar, etc.
+
+**Atributos del `ndarray`:**
+- `ndim`: número de dimensiones.
+- `shape`: tupla con la cantidad de elementos en cada dimensión.
+- `dtype`: tipo de dato de los elementos.
+- `size`: cantidad total de elementos.
+- `itemsize`: tamaño en bytes de cada elemento.
+- `data` / buffer: acceso a los elementos de la matriz.
+- `T`: la transpuesta de la matriz.
+
+#### <a id="clase-2-ecosistema"></a><font color="#1A7F37">Ecosistema: dónde se usa Numpy</font>
+
+Numpy es ampliamente utilizado por otras librerías como base — muchas veces de forma invisible para quien las usa. Aparece en: big data, estadística avanzada (frecuentista y bayesiana), álgebra lineal, procesamiento de lenguaje natural, procesamiento de imágenes y señales, grafos y redes, computación cuántica, astronomía, biología/bioinformática, análisis matemático, geografía, entre otras disciplinas.
+
+Algunos casos de uso reales: procesamiento de las primeras imágenes de agujeros negros, detección de ondas gravitacionales, análisis de datos deportivos, seguimiento de posiciones de animales mediante aprendizaje profundo.
+
+Librerías construidas sobre Numpy: **Pandas** (la que se usa en esta materia), Python Control (señales), NetworkX (grafos), TensorFlow y PyTorch (redes neuronales / deep learning), entre otras. Numpy sentó las bases para que Python se expandiera y que todo este ecosistema pudiera crecer.
+
+#### <a id="clase-2-experimento"></a><font color="#9A6700">Experimento en clase: listas vs. Numpy</font>
+
+*(Actividad práctica realizada en Google Colab.)*
+
+Se comparó el tiempo que tardan en elevar al cuadrado un millón de elementos (10⁶):
+1. Una lista de Python (usando comprensión de listas).
+2. Un array de Numpy, creado con `arange`.
+
+El resultado mostró que Numpy resolvió la operación varias decenas de veces más rápido que la lista (la diferencia relativa varió entre corridas, mostrando cierta dispersión en los resultados).
+
+**Consigna vinculada a la ley de los grandes números:** repetir el experimento y promediar los resultados de todo el grupo, para verificar cómo, a medida que aumenta la cantidad de mediciones, el promedio se acerca a la diferencia real de rendimiento entre listas y Numpy. Con los resultados aportados por el grupo, se confirmó que Numpy es sistemáticamente más rápido, y que agregar más resultados estabiliza la estimación de esa diferencia — una aplicación directa del concepto visto en la Clase 1.
+
+**Segunda consigna:** graficar la densidad de esos resultados y comprobar si, tal como predice el **teorema central del límite**, la distribución se aproxima a una campana de Gauss (forma de la distribución normal).
+
+**Comparación de memoria:** una lista de Python de 10.000 elementos ocupó 360.056 bytes, mientras que un array de Numpy con la misma cantidad de elementos ocupó 80.000 bytes — otra de las razones por las que Numpy resulta más veloz: al ocupar menos memoria, todo el procesamiento es más eficiente.
+
+#### <a id="clase-2-imagenes"></a><font color="#1A7F37">Imágenes como matrices</font>
+
+Una imagen en blanco y negro puede representarse con una sola matriz (cada valor indica intensidad de gris). Una imagen a color, en cambio, es la **superposición de tres matrices** (canales rojo, verde y azul — de ahí el sistema RGB usado también en HTML/CSS): cada canal aporta su intensidad en cada posición, y la combinación de los tres genera el color final. Esto explica por qué Numpy es clave en el procesamiento de imágenes: generarlas o predecirlas mediante IA implica, en el fondo, operar matemáticamente sobre matrices.
+
+#### <a id="clase-2-pandas-intro"></a><font color="#1A7F37">Introducción a Pandas</font>
+
+**Pandas** está orientada al trabajo con **datos estructurados** (tablas — a diferencia de los no estructurados como imágenes o lenguaje, y los semiestructurados vistos en la Clase 1). Fue desarrollada por **Wes McKinney** (autor del libro de bibliografía obligatoria *Python para análisis de datos*), buscando imitar funcionalidades de un lenguaje preexistente: **R**.
+
+Características:
+- Código abierto y multiplataforma.
+- Optimizada con altos estándares de calidad, ya que internamente utiliza Numpy para el procesamiento de las variables numéricas de las tablas.
+- Sintaxis de alto nivel, como el resto de Python.
+- Permite leer y guardar datos tabulares en distintos formatos: CSV, Excel, JSON, entre otros.
+- A diferencia de Numpy (pensado sobre todo para números), permite trabajar con variables ordinales, de fecha, de texto, y realizar uniones entre tablas.
+
+#### <a id="clase-2-series-dataframes"></a><font color="#1A7F37">Series y DataFrames</font>
+
+Pandas se apoya en dos estructuras de datos básicas:
+
+- **Series:** vectores unidimensionales con etiquetas. En la práctica son dos vectores corriendo en paralelo — uno de **valores** (que internamente usa la clase `ndarray` de Numpy) y otro de **índices/etiquetas** (de un tipo propio de Pandas, no de Numpy). Comparten la mayoría de los atributos de `ndarray` (`shape`, `dtype`, `size`, etc.), pero no incluyen métodos como `flatten` o `reshape`, porque no tendría sentido "aplanar" algo que necesariamente mantiene valores y etiquetas asociados en paralelo, ni mezclar en una misma estructura columnas de distinto tipo de dato.
+- **DataFrames:** estructuras bidimensionales construidas sobre la base de las series (equivalen a una tabla completa, con varias columnas).
+
+Pandas suma funciones propias para exploración, manipulación y transformación de datos: `head` (primeros elementos), `describe` (medidas de tendencia central y estadísticas descriptivas), eliminación de valores nulos, `apply` (aplicar una función a cada elemento), `info` (resumen del contenido del DataFrame), agrupamientos, y métodos para exportar a CSV/Excel, entre otros.
+
+> **Ojo con esto:** en un DataFrame, el tipo de dato (`dtype`) que se reporta por columna corresponde al tipo de los **valores**, no al de las etiquetas/índice.
+
+#### <a id="clase-2-indexado"></a><font color="#1A7F37">Indexado y filtrado</font>
+
+El **índice** es una de las características más importantes de Pandas: permite filtrar y quedarse solo con los elementos relevantes para el análisis que se esté haciendo (por ejemplo, quedarse únicamente con registros de una zona geográfica puntual, descartando el resto).
+
+Formas de seleccionar datos, ejemplificadas en clase con un dataset de personajes de un videojuego:
+- **Por columnas:** por nombre (entre corchetes o con notación de punto) o por posición, usando `iloc`.
+- **Por filas:** por posición con `iloc` (siempre fila a la izquierda, columna a la derecha), o mediante *queries* de estilo SQL para filtrar filas según una condición (por ejemplo, quedarse con los registros que superen cierto valor en un atributo).
+
+**Datasets para practicar:** se mencionó **Kaggle** como una de las plataformas de referencia de la comunidad de ciencia de datos e IA, con cientos de miles de datasets públicos, notebooks y modelos preentrenados disponibles para descargar (incluye una librería propia, `kagglehub`, para acceder a ellos vía API).
+
+#### <a id="clase-2-notas"></a><font color="#1A7F37">Notas de la clase</font>
+
+- La clase se dio en dos partes, con material y ejercicios compartidos vía Google Colab.
+- Recomendación: dedicar aunque sea media hora por semana a los ejercicios de la materia ayuda a llegar mejor preparado a los parciales y al trabajo práctico final, sin necesidad de grandes bloques de tiempo.
+- Los ejercicios de cada clase quedan disponibles en la sección de materiales del campus; se retoman al principio de la clase siguiente.
+- El ejercicio de esta clase consistía en empezar a observar el dataset con el que se va a trabajar en el trabajo práctico final de fin de cuatrimestre.
 
 </details>
 
@@ -306,4 +436,4 @@ Introducción al Análisis de Datos
 └── README.md
 ```
 
-Cada nueva clase se agrega a `Material/` numerada en orden (`2 - Clase 2.pdf`, `3 - Clase 3.pdf`, ...), y el desarrollo completo se pega dentro del botón desplegable correspondiente en el [🗓️ Cronograma de clases](#funcionamiento-cronograma), reemplazando el *"Pendiente"*. Cuando eso pasa, sumá también sus subtemas al Índice de arriba, como está hecho con la Clase 1.
+Cada nueva clase se agrega a `Material/` numerada en orden (`2 - Clase 2.pdf`, `3 - Clase 3.pdf`, ...).
