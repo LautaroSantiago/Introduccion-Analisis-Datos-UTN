@@ -26,6 +26,7 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
   - [<font color="#1A7F37">Data Mining y Big Data</font>](#clase-1-data-mining)
   - [<font color="#1A7F37">Análisis estadístico vs. Minería de datos</font>](#clase-1-vs-mineria)
   - [<font color="#1A7F37">Tipos de variables</font>](#clase-1-variables)
+  - [<font color="#1A7F37">Bases de datos: SQL vs. NoSQL (columnares)</font>](#clase-1-bases-de-datos)
   - [<font color="#1A7F37">Clasificación del análisis según cantidad de variables</font>](#clase-1-clasificacion-analisis)
   - [<font color="#9A6700">Evolución tecnológica del lenguaje dominante</font>](#clase-1-evolucion-lenguajes)
   - [<font color="#1A7F37">Ley de los grandes números</font>](#clase-1-ley-grandes-numeros)
@@ -108,9 +109,10 @@ Proceso de **recolección** (bases de datos, archivos, encuestas) → **limpieza
 
 #### <a id="clase-1-data-mining"></a><font color="#1A7F37">Data Mining y Big Data</font>
 
-- La minería de datos (*data mining*) surge en el siglo XIX con el análisis de los datos sociales de Quetelet, biológicos de Galton y agronómicos de Fisher.
-- Forma parte del proceso conocido como **KDD** (*Knowledge Discovery in Databases* — descubrimiento de conocimiento a partir de los datos): el objetivo es extraer información de una gran base de datos, sin disponer de conocimiento previo, para construir patrones y/o relaciones sistemáticas de valor, así como anomalías.
-- **Big Data — las 5 "V":** Volumen, Velocidad y Variedad como las tres centrales; Veracidad y Valor como las dos adicionales a tener en cuenta.
+- La minería de datos (*data mining*) surge en el siglo XIX con el análisis de los datos sociales de Quetelet, biológicos de Galton y agronómicos de Fisher. Es un concepto muy reciente si se lo compara con la estadística tradicional (que tiene miles de años de desarrollo).
+- Forma parte del proceso conocido como **KDD** (*Knowledge Discovery in Databases* — descubrimiento de conocimiento a partir de los datos): el objetivo es extraer información de una gran base de datos, sin disponer de conocimiento previo, para construir patrones y/o relaciones sistemáticas de valor, así como anomalías. "Sin conocimiento previo" implica un abordaje empírico: se llega a los datos sin una hipótesis de partida y se observa qué está sucediendo.
+- **Big Data — las 5 "V":** Volumen, Velocidad y Variedad como las tres centrales; Veracidad y Valor como las dos adicionales a tener en cuenta. *⚠️ Marcado explícitamente como tema de parcial.*
+- Definir Big Data por una cantidad fija (ej. "más de X TB") pierde sentido rápido, porque la capacidad de procesamiento crece todo el tiempo — por eso se lo define como concepto y no como una cifra. Es un campo en permanente evolución, donde los términos de moda van cambiando (ciencia de datos → minería de datos → big data → inteligencia artificial), aunque todos están relacionados entre sí.
 
 #### <a id="clase-1-vs-mineria"></a><font color="#1A7F37">Análisis estadístico vs. Minería de datos</font>
 
@@ -121,12 +123,24 @@ Proceso de **recolección** (bases de datos, archivos, encuestas) → **limpieza
 | Supuestos iniciales | Sin supuestos iniciales |
 | Herramientas informáticas opcionales | Recursos informáticos indispensables |
 
+El procedimiento **hipotético-deductivo** parte de una hipótesis y la contrasta con la realidad para ver si se sostiene o no. El procedimiento **inductivo**, en cambio, generaliza a partir de la observación, sin hipótesis previa. Durante buena parte del siglo XX el método inductivo estuvo "mal visto" en el ámbito científico — se pensaba que ya no era necesario dado el desarrollo alcanzado por el método hipotético-deductivo — pero la aparición de los grandes volúmenes de datos actuales lo volvió a poner en valor. Aun así, hay que ser cauteloso con las generalizaciones que produce, ya que carecen del respaldo de una hipótesis validada.
+
 #### <a id="clase-1-variables"></a><font color="#1A7F37">Tipos de variables</font>
 
-- **Categóricas:** cualitativas, no se pueden ordenar.
-- **Ordinales:** se pueden ordenar, pero no se puede establecer distancia entre valores.
-- **Cuantitativas discretas:** numéricas; entre dos valores consecutivos no poseen valores intermedios.
-- **Cuantitativas continuas:** numéricas; entre dos valores poseen infinitos valores intermedios.
+- **Categóricas:** cualitativas, no se pueden ordenar. Ej: nombre, ciudad.
+- **Ordinales:** se pueden ordenar, pero no se puede establecer distancia entre valores. Ej: una calificación de atención al cliente (mala, regular, buena, muy buena).
+- **Cuantitativas discretas:** numéricas; entre dos valores consecutivos no poseen valores intermedios. Ej: cantidad de hijos de una persona.
+- **Cuantitativas continuas:** numéricas; entre dos valores poseen infinitos valores intermedios. Ej: una distancia.
+
+> *⚠️ Marcado explícitamente como tema de parcial:* esta clasificación es "recontrabásica" — aplicar mal esta distinción en el trabajo práctico final (usar técnicas de variables cuantitativas sobre variables categóricas, por ejemplo) es motivo de ir a recuperatorio.
+
+#### <a id="clase-1-bases-de-datos"></a><font color="#1A7F37">Bases de datos: SQL vs. NoSQL (columnares)</font>
+
+Dentro de la "pata tecnológica" del análisis de datos, se repasó la diferencia entre tipos de bases de datos:
+
+- **SQL:** construida priorizando la **persistencia y consistencia** de la información (toda la información tiene que estar siempre disponible y completa — por ejemplo, en una cuenta bancaria no puede faltar información). Está organizada por filas: procesar una sola columna igual implica recorrer en memoria toda la fila, lo cual es costoso si solo se necesita una porción de los datos.
+- **NoSQL:** prioriza la **velocidad de procesamiento** por sobre la consistencia total. Es útil en casos donde no hace falta tener siempre el 100% de la información disponible (ej: una red social puede seguir funcionando aunque se pierda temporalmente un nodo o *data center*).
+- **Bases de datos columnares** (ej. **Cassandra**, un tipo de NoSQL): invierten la lógica de procesamiento respecto a SQL — trabajan columna por columna en lugar de fila por fila, lo cual resulta mucho más eficiente cuando el análisis de datos necesita operar sobre variables (columnas) puntuales en vez de registros completos.
 
 #### <a id="clase-1-clasificacion-analisis"></a><font color="#1A7F37">Clasificación del análisis según cantidad de variables</font>
 
@@ -138,11 +152,13 @@ Proceso de **recolección** (bases de datos, archivos, encuestas) → **limpieza
 
 #### <a id="clase-1-evolucion-lenguajes"></a><font color="#9A6700">Evolución tecnológica del lenguaje dominante</font>
 
-Históricamente **C** fue el lenguaje más usado. Con el tiempo, **R** creció fuerte hasta ubicarse en el top 10, siendo un lenguaje enfocado exclusivamente en análisis de datos, mientras C fue perdiendo terreno. En 2017 aparece el paper *"Attention Is All You Need"*, que impulsa la explosión de la inteligencia artificial. Desde entonces, **Python** asciende hasta convertirse en el lenguaje más usado, superando a R, por ser el lenguaje de la IA y del procesamiento de grandes volúmenes de datos.
+Históricamente **C** fue el lenguaje más usado. Python fue creado por **Guido van Rossum en 1989**, con la filosofía de ser un lenguaje simple y accesible — priorizando que sea fácil de leer por sobre estar altamente optimizado (algo que en la década de 1990, con hardware muy limitado, generó bastantes críticas). Con el tiempo, **R** creció fuerte hasta ubicarse en el top 10 (siendo un lenguaje enfocado exclusivamente en análisis de datos), mientras C fue perdiendo terreno. En 2017 aparece el paper *"Attention Is All You Need"*, que impulsa la explosión de la inteligencia artificial. Desde entonces, **Python** asciende hasta convertirse en el lenguaje más usado, superando incluso a R, por ser el lenguaje de la IA y del procesamiento de grandes volúmenes de datos — impulsado en gran parte por Numpy (ver Clase 2).
 
 #### <a id="clase-1-ley-grandes-numeros"></a><font color="#1A7F37">Ley de los grandes números</font>
 
 Formulada originalmente por **Jacob Bernoulli** en el siglo XVII: la frecuencia relativa de un evento tiende a converger hacia su probabilidad teórica a medida que aumenta el número de ensayos. En el contexto de la estadística inferencial: a medida que crece el tamaño de una muestra tomada de una población, la media muestral tiende a aproximarse cada vez más al valor esperado (esperanza matemática) de la población.
+
+> *⚠️ Marcado explícitamente como concepto a estudiar/consolidar para los exámenes, junto con el teorema central del límite (ver abajo).*
 
 - **Implicancia práctica:** no se pueden sacar conclusiones definitivas sobre fenómenos masivos a partir de casos aislados; hace falta una muestra representativa y lo suficientemente grande.
 - **Vínculo con la IA:** el salto de capacidad entre modelos (ej. GPT-2 a GPT-3) se explica en gran parte por el volumen de datos de entrenamiento — es una cuestión de escala, no solo conceptual.
@@ -152,6 +168,8 @@ Formulada originalmente por **Jacob Bernoulli** en el siglo XVII: la frecuencia 
 Desarrollado originalmente entre los siglos XVIII y XIX, y reformulado hasta el siglo XX. Establece que, dada una población con cualquier distribución, la distribución de las medias muestrales tiende a una distribución normal a medida que aumenta el tamaño de la muestra, siempre que la varianza poblacional sea finita.
 
 - Permite, conociendo las propiedades de la distribución normal, testear si una diferencia observada entre dos grupos (ej. rendimiento de dos semillas, una original y una modificada genéticamente) es significativa o no.
+
+> *⚠️ Concepto que el profesor pidió consolidar bien para los exámenes — es habitual confundirlo con la ley de los grandes números.*
 
 #### <a id="clase-1-tcl-test-hipotesis"></a><font color="#9A6700">Relación entre el TCL y el test de hipótesis</font>
 
@@ -187,6 +205,8 @@ La clase retoma la Clase 1: el crecimiento exponencial del volumen de datos disp
 
 Numpy no es una librería que se use de forma directa y permanente en el trabajo práctico final (para eso está Pandas, que se construye sobre ella), pero entender su funcionamiento explica gran parte de por qué Python llegó a ser tan popular en este campo.
 
+> *⚠️ Marcado explícitamente como tema de parcial:* por qué Numpy es tan importante para la expansión de Python.
+
 #### <a id="clase-2-definicion"></a><font color="#1A7F37">Qué es Numpy y características generales</font>
 
 **Numpy** (*Numerical Python*) sirve para la manipulación eficiente de vectores. Aunque su nombre remite al procesamiento de números, sus características van más allá de solo trabajar con variables cuantitativas: apuntan a optimizar cualquier procedimiento que involucre datos numéricos.
@@ -202,6 +222,8 @@ Python se diseñó priorizando la legibilidad por sobre la optimización (el pro
 #### <a id="clase-2-ndarray"></a><font color="#1A7F37">La clase `ndarray`</font>
 
 Es la clase fundamental de Numpy — base de todas las operaciones matemáticas y numéricas que ofrece la librería.
+
+> *⚠️ Marcado explícitamente como tema de parcial:* cuáles son las características de `ndarray` y por qué es tan importante.
 
 A diferencia de las **listas de Python** (mutables, de tamaño variable, capaces de mezclar tipos de datos en distintas posiciones, lo que obliga a reservar y gestionar memoria de forma poco eficiente), un `ndarray`:
 - Se crea con un **tamaño fijo** desde su instanciación, con espacios de memoria contiguos reservados.
