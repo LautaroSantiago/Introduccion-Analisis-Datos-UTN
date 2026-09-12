@@ -47,6 +47,15 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
   - [<font color="#1A7F37">Procesamiento de fechas y texto</font>](#clase-2-fechas-texto)
   - [<font color="#1A7F37">Ejercicio de la clase</font>](#clase-2-ejercicio)
   - [<font color="#1A7F37">Notas de la clase</font>](#clase-2-notas)
+- [<font color="#8250DF"><strong>Clase 4 — 11/9 · Data cleaning</strong></font>](#clase-4)
+  - [<font color="#1A7F37">El proceso de análisis: ETL y la etapa de limpieza</font>](#clase-4-etl)
+  - [<font color="#1A7F37">Valores duplicados</font>](#clase-4-duplicados)
+  - [<font color="#1A7F37">Valores faltantes: la no respuesta</font>](#clase-4-no-respuesta)
+  - [<font color="#1A7F37">Tratamiento de la no respuesta</font>](#clase-4-tratamiento-no-respuesta)
+  - [<font color="#9A6700">Valores atípicos vs. valores inconsistentes</font>](#clase-4-atipicos-inconsistentes)
+  - [<font color="#9A6700">Detección de valores atípicos</font>](#clase-4-deteccion-atipicos)
+  - [<font color="#1A7F37">Transformación y escalado de datos</font>](#clase-4-transformaciones)
+  - [<font color="#1A7F37">Notas de la clase</font>](#clase-4-notas)
 - [<font color="#9A6700"><strong>🟣 2/10 · Primer parcial teórico</strong></font>](#eval-2-10)
 - [<font color="#8250DF"><strong>Clase 7 — 9/10 · Análisis de datos con R</strong></font>](#clase-7) *(pendiente)*
 - [<font color="#9A6700"><strong>🟣 16/10 · Recuperatorio primer parcial</strong></font>](#eval-16-10)
@@ -379,9 +388,87 @@ Consigna del PDF de ejercicios:
 </details>
 
 <details>
-<summary><font color="#1A7F37">Clase 4 — 11/9 · Data cleaning</font></summary>
+<summary><a id="clase-4"></a><font color="#1A7F37"><strong>Clase 4 — 11/9 · Data cleaning</strong></font></summary>
 
-*Pendiente.*
+[![Abrir en Colab](https://img.shields.io/badge/📓_Google_Colab-Clase_4-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white)](https://colab.research.google.com/drive/1_gDF8pJL1nT8uR4utQ8N-Lx-4gwa8EPS?usp=sharing)
+
+#### <a id="clase-4-etl"></a><font color="#1A7F37">El proceso de análisis: ETL y la etapa de limpieza</font>
+
+El proceso de análisis de datos suele denominarse **ETL** (cargar, transformar y volver a guardar los datos — datos procesados con procedimientos ya realizados). Salvo excepciones (como el web scraping), el analista de datos en general **no participa** de las etapas de recolección ni de almacenamiento de los datos — para eso ya cuenta con formación en bases de datos (SQL/NoSQL). El trabajo del analista suele arrancar en la etapa de **limpieza y preprocesamiento**.
+
+Retomando la metáfora de la Clase 1 (la minería de datos como separar lo valioso de lo que no lo es): la limpieza es un paso obvio de ese proceso. No es estrictamente lineal — muchas veces, durante el análisis o la visualización, se detectan nuevos problemas que obligan a volver a revisar la limpieza. Todas estas etapas están bastante interconectadas.
+
+**¿Por qué es necesaria la limpieza?** Los datos reales (recolectados por sensores, encuestas, etc.) casi siempre tienen problemas: valores nulos, valores duplicados, valores atípicos o inconsistentes. El analista tiene que detectar estos problemas, identificar qué está sucediendo y, en algunos casos, plantear una solución.
+
+#### <a id="clase-4-duplicados"></a><font color="#1A7F37">Valores duplicados</font>
+
+Es el problema más simple de los vistos en la clase, aunque también tiene sus grises (por ejemplo, dos registros con el mismo ID pero distinta localidad: ¿es un error de carga o son dos casos distintos?). Ante la duda, lo correcto es consultar con quien hizo el relevamiento; si no es posible, se define un criterio (ej. no duplicar por ID, o no duplicar por combinación de nombre y localidad).
+
+La solución técnica es sencilla: se eliminan los registros repetidos y se conserva uno solo, ya que la sobrerrepresentación de algunos datos puede llevar a conclusiones sesgadas. En Pandas, la función utilizada para esto es `drop_duplicates()`, que permite elegir eliminar por una sola columna (ej. ID) o por combinación de varias columnas.
+
+#### <a id="clase-4-no-respuesta"></a><font color="#1A7F37">Valores faltantes: la no respuesta</font>
+
+La **no respuesta parcial** (valores vacíos en determinados campos de un registro) es un problema frecuentemente subestimado. Se le presta bastante atención en machine learning, pero tradicionalmente menos en la estadística inferencial clásica — aunque es un tema muy investigado en el último siglo.
+
+**Umbrales de gravedad según el porcentaje de no respuesta:**
+- Menos del 5%: no suele ser un problema relevante.
+- Más del 10%: empieza a ser importante tenerlo en cuenta.
+- Más del 30%: se considera grave (en algunos casos se llega a descartar la variable, dependiendo del campo de estudio).
+
+**Tipos de no respuesta** (clasificación conceptual, no matemática estricta):
+- **Completamente aleatoria:** no existe ningún patrón ni asociación con otras variables — es el caso menos problemático, no introduce sesgo. Ejemplo: un sensor que deja de reportar datos por una caída de señal 4G/5G, sin relación con lo que se está midiendo.
+- **Aleatoria:** la no respuesta está asociada a una variable secundaria (no a la variable de interés en sí misma). Ejemplo: un sensor de temperatura que falla más con alta humedad — si la humedad está correlacionada con la temperatura, la media de temperatura estimada quedará subestimada.
+- **No aleatoria:** la no respuesta se explica por la propia variable de interés — el caso más grave, porque genera un **problema circular** (falta justo la información que se necesitaría para corregir el sesgo). Ejemplo: en una encuesta de ingresos, si las personas de mayores ingresos son las que menos responden, no se puede usar el ingreso mismo para estimarlas.
+
+Un ejemplo trabajado en clase con una encuesta de 1.000 casos (20% de no respuesta) mostró esto con un "semáforo": 🟢 si la tasa de no respuesta es pareja entre grupos etarios (aleatoria completa), 🟡 si varía según la edad pero la variable de interés (ingreso) no es la causa directa (aleatoria), 🔴 si la no respuesta crece justamente en los grupos de mayor ingreso (no aleatoria — la más grave).
+
+#### <a id="clase-4-tratamiento-no-respuesta"></a><font color="#1A7F37">Tratamiento de la no respuesta</font>
+
+- **No respuesta completamente aleatoria:** solución simple — se eliminan los registros con no respuesta, ya que no se introduce sesgo (la ausencia está distribuida por igual en todos los estratos).
+- **No respuesta aleatoria o no aleatoria:** requiere evaluar distintas soluciones:
+  - **Imputación por medias condicionadas:** se arman grupos, se calcula la media de cada uno, y se asigna esa media a los casos con no respuesta de ese grupo. Es la solución más básica.
+  - **Imputación por modelo (machine learning):** se entrena un modelo que, en base a muchas variables (edad, sexo, nivel educativo, ocupación, localidad, etc.), predice un valor probable para cada registro faltante. Es una solución más sofisticada.
+  - **Hot Deck:** busca otro caso con las mismas características en ciertas variables y, de manera aleatoria, toma su valor. Funciona bien siempre que las variables usadas estén realmente correlacionadas con la variable de interés (ej. la ocupación predice mejor el ingreso que el apellido).
+  - **Reponderación:** ajustar los ponderadores para que los casos que sí respondieron representen también a los que no.
+
+**Ponderadores:** un ponderador indica a cuántos casos de la población representa cada elemento muestral (población del estrato ÷ tamaño de la muestra de ese estrato). Cuanto menor es el ponderador (mayor tamaño de muestra en relación al universo), más precisas son las estimaciones de ese grupo — y menos afecta un valor atípico aislado. En datasets reales como la EPH (la que se usa en el trabajo práctico final) hay múltiples ponderadores distintos, según qué se esté estimando.
+
+> **Conclusión sobre la no respuesta:** no hay una técnica automática o infalible — es una decisión metodológica del investigador, y la solución puede ser simple o compleja según los objetivos del análisis y las características de la no respuesta.
+
+#### <a id="clase-4-atipicos-inconsistentes"></a><font color="#1A7F37">Valores atípicos vs. valores inconsistentes</font>
+
+> *⚠️ Marcado explícitamente como pregunta muy común de parcial: la diferencia entre valores atípicos e inconsistentes.*
+
+- **Valor atípico:** una observación alejada del patrón general del conjunto, pero que **es plausible y válida** dentro del dominio de la investigación. Ejemplos: una persona que declara 105 años (poco común, pero posible); el salario de un futbolista de élite dentro de un estudio de salarios; una propiedad en venta cerca del río en un análisis de propiedades en Avellaneda (hay pocas, pero es una zona real de Avellaneda).
+- **Valor inconsistente:** un dato que **no tiene coherencia** con el conjunto — está fuera del dominio válido. Ejemplos: una persona de 250 años (imposible, seguramente error de carga); una propiedad "en venta en Avellaneda" cuyas coordenadas caen fuera de Avellaneda.
+
+**Cómo tratarlos:**
+- Los valores **atípicos** no necesariamente deben excluirse ni modificarse — deben identificarse y ser cuidadosamente inspeccionados; su inclusión en el análisis depende de los objetivos de este (ej. el salario de un futbolista no sirve para estimar cuánto pedir en una entrevista laboral común, pero sí podría servir para un estudio de mercado de productos de alta gama).
+- Los valores **inconsistentes** sí deben corregirse o eliminarse — no aportan información válida.
+
+#### <a id="clase-4-deteccion-atipicos"></a><font color="#1A7F37">Detección de valores atípicos</font>
+
+> *⚠️ Marcado explícitamente como tema de parcial: interpretar un gráfico de cajas es algo que el profesor siempre pide.*
+
+- **Gráfico de cajas (boxplot):** técnica visual común para detectar atípicos en análisis univariado. El rango intercuartílico (que se ve reflejado en la "caja") se retomará en profundidad en la clase de visualización de datos.
+- **Z-score** *(⚠️ otra pregunta explícita de parcial: qué es el Z-score)*: indica cuántos desvíos estándar se aleja un registro de la media de una variable. Fórmula: `Z = (X − media) / desvío_estándar`. Ejemplo trabajado en clase: con una media de edad de 46,9 años y un desvío estándar de 23,4, una persona de 100 años tiene un Z-score de 2,38 — es decir, se aleja más de dos desvíos estándar de la media, lo que estadísticamente marca ese valor como el más alejado del conjunto.
+- **Rango intercuartílico (IQR):** otra técnica de detección, visible también en el gráfico de cajas (se profundiza en la clase de visualización).
+
+#### <a id="clase-4-transformaciones"></a><font color="#1A7F37">Transformación y escalado de datos</font>
+
+Las transformaciones permiten optimizar el análisis: trabajar con otras distribuciones, llevar valores distintos a un mismo rango, hacer comparables magnitudes con escalas de medición diferentes, o satisfacer propiedades estadísticas requeridas por ciertos modelos. Se pueden aplicar por columna o por individuo/registro.
+
+- **Estandarización (Z-score / `X_norm`):** `(X − media) / desvío estándar`. Es la misma fórmula usada para detectar atípicos, pero aplicada como transformación general de toda la variable.
+- **Transformación min-max:** lleva todos los valores a una escala común (ej. entre 0 y 1) tomando el mínimo y el máximo del conjunto. Ejemplo trabajado en clase: dos jurados con criterios muy distintos (uno que puntúa bajo, otro que puntúa alto) — con esta transformación, un puntaje bajo de un jurado exigente puede terminar valiendo más que un puntaje alto de un jurado poco exigente (por ejemplo: comparar notas de dos materias con distinta exigencia, o los puntajes de dos jueces de un concurso).
+- **Transformación logarítmica:** el logaritmo natural reduce la influencia de los valores atípicos. Ejemplo: en escala decimal, 10 es 2,5 veces más que 4; en escala logarítmica, 10 (≈2,4) es apenas un 50% más que 4 (≈1,6) — por eso ciertos modelos (incluidas sugerencias típicas de herramientas de IA para el TP final) funcionan mejor con variables transformadas logarítmicamente cuando hay valores atípicos.
+- También se pueden transformar variables cuantitativas en ordinales/categóricas (ej. edad → joven/adulto/anciano) o de texto a fecha, entre otras — en la práctica, cualquier tipo de dato puede transformarse (los modelos de IA, por ejemplo, transforman palabras en vectores numéricos).
+
+#### <a id="clase-4-notas"></a><font color="#1A7F37">Notas de la clase</font>
+
+- El profesor cuenta esta clase como su "Clase 3" en su propio conteo interno (por la fusión de Numpy y Pandas en una sola clase el 4/9 al no haber clase el 28/8) — por eso en el campus puede figurar como "Ejercicio Clase 3". En este README se mantiene la numeración original del cronograma (Clase 4) para que coincida con la fecha real (11/9).
+- Ejercicios de esta clase disponibles en el campus, en Materiales y exámenes → Ejercicios.
+- Recordatorio sobre el primer parcial (2/10): presencial, combina preguntas de opción múltiple y de desarrollo. El profesor adelantó que es muy probable que pida desarrollar la diferencia entre ciencia de datos y análisis de datos (contenido de la Clase 1). *⚠️ Marcado explícitamente como pregunta de parcial.*
+- Ambos parciales del cuatrimestre (este y el de otra materia coincidente) se tomarán el mismo día para minimizar los viajes de quienes cursan a distancia. Recuperatorio: 16/10.
 
 </details>
 
