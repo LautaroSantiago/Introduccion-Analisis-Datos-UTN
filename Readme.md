@@ -56,6 +56,15 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
   - [<font color="#9A6700">Detección de valores atípicos</font>](#clase-4-deteccion-atipicos)
   - [<font color="#1A7F37">Transformación y escalado de datos</font>](#clase-4-transformaciones)
   - [<font color="#1A7F37">Notas de la clase</font>](#clase-4-notas)
+- [<font color="#8250DF"><strong>Clase 5 — 25/9 · Análisis exploratorio de datos y estadística descriptiva</strong></font>](#clase-5)
+  - [<font color="#9A6700">Primera aproximación: análisis de frecuencias</font>](#clase-5-frecuencias)
+  - [<font color="#9A6700">Estadística univariada: medidas de tendencia central</font>](#clase-5-tendencia-central)
+  - [<font color="#1A7F37">Medidas de posición</font>](#clase-5-posicion)
+  - [<font color="#1A7F37">Medidas de dispersión</font>](#clase-5-dispersion)
+  - [<font color="#1A7F37">Asimetría y curtosis</font>](#clase-5-asimetria-curtosis)
+  - [<font color="#9A6700">Análisis bivariado: covarianza y correlación</font>](#clase-5-bivariado)
+  - [<font color="#1A7F37">Análisis multivariado</font>](#clase-5-multivariado)
+  - [<font color="#9A6700">Notas de la clase — información del primer parcial</font>](#clase-5-notas)
 - [<font color="#9A6700"><strong>🟣 2/10 · Primer parcial teórico</strong></font>](#eval-2-10)
 - [<font color="#8250DF"><strong>Clase 7 — 9/10 · Análisis de datos con R</strong></font>](#clase-7) *(pendiente)*
 - [<font color="#9A6700"><strong>🟣 16/10 · Recuperatorio primer parcial</strong></font>](#eval-16-10)
@@ -468,16 +477,106 @@ Las transformaciones permiten optimizar el análisis: trabajar con otras distrib
 </details>
 
 <details>
-<summary><font color="#1A7F37">Clase 5 — 18/9 · Análisis exploratorio de datos y estadística descriptiva</font></summary>
+<summary><a id="clase-5"></a><font color="#1A7F37"><strong>Clase 5 — 25/9 · Análisis exploratorio de datos y estadística descriptiva</strong></font></summary>
 
-*Pendiente.*
+*(Esta clase corresponde al tema "Análisis exploratorio de datos y estadística descriptiva" del cronograma original, previsto para el 18/9, pero se dictó efectivamente el 25/9 — el tema "Visualización de datos", originalmente del 25/9, quedó pendiente para después del parcial.)*
+
+#### <a id="clase-5-frecuencias"></a><font color="#1A7F37">Primera aproximación: análisis de frecuencias</font>
+
+Una vez que los datos están limpios (clase anterior), el siguiente paso es empezar a aplicarles estadística para poder comprenderlos — como se vio en la Clase 1, un dato aislado y sin contexto no tiene utilidad; hay que ordenar y organizar la información para facilitar su interpretación.
+
+La primera aproximación suele ser el **análisis de frecuencias**, que varía según el tipo de variable:
+
+> *⚠️ Marcado explícitamente como "pregunta recontra de parcial": la clasificación de tipos de variables vista en la Clase 1 (categóricas, ordinales, cuantitativas discretas y cuantitativas continuas).*
+
+- **Variables cualitativas (categóricas):** el conteo es directo — se cuenta cuántas veces se repite cada categoría. Puede expresarse como frecuencia simple (ej. 49 personajes de tipo "luchador" sobre 172) o como frecuencia porcentual (28,5%).
+- **Variables cuantitativas:** requieren agrupar en intervalos (ej. franjas etarias: 0-16, 17-30, 31-50, 51-65, 65+) para poder calcular frecuencias absolutas o porcentuales — es poco intuitivo analizarlas dato por dato, sobre todo si son continuas.
+
+El conteo de frecuencias es la forma más simple y antigua de estadística (el "sondeo", contar cabezas), pero sigue siendo un primer paso útil antes de profundizar.
+
+#### <a id="clase-5-tendencia-central"></a><font color="#1A7F37">Estadística univariada: medidas de tendencia central</font>
+
+Las medidas de tendencia central son **resúmenes**: buscan representar con un solo valor a todo el conjunto de datos (a costa de perder parte de la información).
+
+- **Media (aritmética):** el promedio — suma de todos los valores dividida la cantidad de elementos.
+- **Mediana:** el valor central, una vez ordenados los datos (indistintamente de mayor a menor o viceversa), que divide al conjunto en dos partes iguales.
+- **Moda:** el valor que más se repite.
+- **Media geométrica:** en vez de sumar y dividir, multiplica todos los elementos y calcula la raíz enésima (raíz cuadrada para 2 elementos, cúbica para 3, etc.). Al no verse tan influenciada por valores extremos altos, da un resultado más bajo que la media aritmética — útil cuando no se quiere que un valor atípico alto condicione demasiado el resumen (ejemplo trabajado en clase: 711,73 de media aritmética vs. 662 de media geométrica, sobre la variable "Riot Points" de un dataset de personajes de un videojuego).
+- **Media podada:** elimina un porcentaje de los valores extremos (ej. 5% más bajo y 5% más alto) y calcula la media aritmética sobre el resto. En el ejemplo de clase dio 740 — más alta que la aritmética y la geométrica, porque en ese caso los valores atípicos estaban concentrados hacia abajo (asimetría negativa, ver más abajo).
+
+> *⚠️ Marcado explícitamente como posible "trampa" de parcial: la mediana es, al mismo tiempo, una medida de tendencia central **y** una medida de posición (ver siguiente sección) — la mayoría de las otras medidas son solo una cosa o la otra.*
+
+La mediana es más **robusta** que la media: no se ve afectada por valores extremos (a la mediana no le importa si el valor más alto es 9.990 o 15.000 millones, mientras siga estando en el extremo). Por eso conviene usarla con muestras pequeñas.
+
+#### <a id="clase-5-posicion"></a><font color="#1A7F37">Medidas de posición</font>
+
+Dividen al conjunto de datos ordenado en partes iguales:
+- **Mediana:** en 2 partes.
+- **Cuartiles:** en 4 partes (3 cuartiles).
+- **Quintiles:** en 5 partes.
+- **Deciles:** en 10 partes.
+- **Percentiles:** en 100 partes.
+
+Ejemplo de clase (variable "Riot Points"): primer cuartil en 585, mediana en 790, tercer cuartil en 880.
+
+#### <a id="clase-5-dispersion"></a><font color="#1A7F37">Medidas de dispersión</font>
+
+Indican la variabilidad de los datos — el grado de concentración alrededor de una medida de tendencia central o de posición.
+
+- **Varianza:** se construye alrededor de la **media**. Suma de las diferencias entre cada valor y la media, elevadas al cuadrado. La varianza poblacional divide por *n*; la varianza muestral divide por *n − 1* (esto exagera levemente la dispersión estimada, para no subestimarla al trabajar con una muestra).
+- **Desvío estándar:** raíz cuadrada de la varianza — permite volver a la unidad de medida original.
+- **Coeficiente de variación:** desvío estándar sobre la media (o sobre la estimación que se esté calculando).
+- **Rango intercuartílico:** tercer cuartil menos primer cuartil — una medida de dispersión construida sobre medidas de posición (útil cuando la media no es representativa).
+- **MAD (desviación absoluta mediana):** la mediana de los desvíos absolutos respecto de la mediana — el equivalente al desvío estándar, pero construido alrededor de la mediana en vez de la media.
+
+#### <a id="clase-5-asimetria-curtosis"></a><font color="#1A7F37">Asimetría y curtosis</font>
+
+- **Coeficiente de asimetría muestral (Fisher-Pearson):** se calcula en relación a la media y permite identificar si una distribución continua es simétrica, o tiene asimetría negativa (a la izquierda) o positiva (a la derecha). Ejemplo de clase: con moda 880, mediana 790 y media 711 (en ese orden decreciente), la distribución tiene **asimetría negativa** (coeficiente de -1,08) — los valores extremos están hacia abajo, por eso al recortarlos (media podada) el resultado se acerca más a la mediana y a la moda.
+- **Coeficiente de asimetría de Pearson:** compara la media con la moda y lo divide por el desvío estándar.
+- **Coeficiente de asimetría de Bowley:** se construye usando cuartiles (medidas de posición), sin usar la media, la moda ni el desvío estándar.
+- **Curtosis:** mide el grado de apuntamiento de una distribución. Puede ser leptocúrtica, mesocúrtica o platicúrtica.
+
+> Distintas metodologías de cálculo pueden llevar a resultados distintos — los datos no "hablan por sí solos"; el analista construye un contexto eligiendo qué herramientas usar, y esas elecciones pueden influir en las conclusiones.
+
+#### <a id="clase-5-bivariado"></a><font color="#1A7F37">Análisis bivariado: covarianza y correlación</font>
+
+El análisis bivariado estudia dos variables a la vez (ej. peso según altura, desocupación según aglomerado), asumiendo a veces una relación de dependencia (variable independiente/dependiente) y otras veces una relación simétrica, sin causalidad implícita.
+
+- **Tabla de doble entrada:** análisis de frecuencia bivariado — por ejemplo, cantidad de personajes según tipo de héroe y tipo de rango de ataque (cuerpo a cuerpo vs. a distancia).
+- **Covarianza:** misma lógica que la varianza, pero relacionando dos variables entre sí en lugar de una variable consigo misma. Su gran defecto es que **no es fácilmente interpretable**, porque está muy influenciada por la escala/unidad de medida de cada variable (comparar covarianzas de variables con rangos muy distintos no tiene sentido directo).
+- **Correlación de Pearson:** estandariza la covarianza, produciendo valores entre -1 y 1, mucho más interpretables. Mide asociación **lineal** (puede haber asociaciones no lineales, como cuadráticas, que Pearson no capta bien). Un valor negativo no significa ausencia de asociación, sino asociación **inversa** (cuando una variable crece, la otra decrece); los valores cercanos a 0 sí indican poca o ninguna asociación. La diagonal de una matriz de correlación siempre da 1, porque es la asociación de cada variable consigo misma.
+
+> *⚠️ El profesor adelantó que, como mucho, puede pedir en el parcial interpretar una matriz de correlación (no llegaron a ver la clase de gráficos).*
+
+**Correlación no implica causalidad:** una correlación alta (ej. 0,84 entre dos variables que miden el precio de un personaje en dos monedas distintas del juego) tiene sentido lógico en ese caso puntual, pero en general hay que ser cuidadoso al inferir causalidad a partir de una correlación.
+
+También se mencionó el **clustering** (agrupamiento) como forma de reordenar visualmente una matriz de correlación, agrupando las variables más asociadas entre sí — un anticipo de los modelos de clustering que se ven más adelante en la cursada.
+
+#### <a id="clase-5-multivariado"></a><font color="#1A7F37">Análisis multivariado</font>
+
+Analiza más de dos variables a la vez. La complejidad del análisis crece según una relación entre la cantidad de variables (columnas, **P**) y de registros (filas, **N**) — a mayor cantidad de variables incluidas, el análisis se vuelve más costoso computacionalmente (procesamiento, memoria, energía), de forma más que proporcional.
+
+Técnicas más avanzadas de análisis multivariado —como el análisis de componentes principales (PCA) o el análisis de correspondencia— **no forman parte del contenido de la materia**, aunque están desarrolladas en el libro de Chan, Badano y Rey para quien quiera profundizar. Sobre modelado de datos se va a ver algo (poco) hacia el final del cuatrimestre.
+
+#### <a id="clase-5-notas"></a><font color="#1A7F37">Notas de la clase — información del primer parcial</font>
+
+> *⚠️ Toda esta sección es información directa sobre el primer parcial, dada explícitamente en esta clase.*
+
+- **Modalidad:** presencial, en el aula 308, escrito con hoja y lapicera. No se puede usar celular ni inteligencia artificial. No hay "modelo" de parcial previo.
+- **Formato:** 100% teórico — combina preguntas de opción múltiple y de desarrollo. No incluye cálculos ni consignas de programar código.
+- **Duración estimada:** no debería insumir más de media hora.
+- **Temario:** todo lo visto hasta esta clase inclusive — es decir, los cinco temas dados hasta acá (conceptos básicos, Numpy, Pandas, data cleaning, y esta clase de estadística descriptiva). **La visualización de datos NO entra**, porque todavía no se llegó a esa clase.
+- **Pregunta de desarrollo que "seguro" entra:** la relación entre análisis de datos y minería de datos (contenido de la Clase 1).
+- **Material de estudio recomendado:** los dos primeros capítulos de Chan, Badano y Rey, los ejercicios, los Colabs y los apuntes/diapositivas de cada clase — todo eso puede entrar, salvo gráficos (no se llegó a dar esa clase).
+- Llevar el DNI el día del parcial.
 
 </details>
 
 <details>
 <summary><font color="#1A7F37">Clase 6 — 25/9 · Visualización de datos</font></summary>
 
-*Pendiente.*
+*Pendiente — este tema se corrió para después del primer parcial (ver nota en la [Clase 5](#clase-5)).*
+
 
 </details>
 
