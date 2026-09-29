@@ -394,6 +394,7 @@ Consigna del PDF de ejercicios:
 
 [![Ver PDF](https://img.shields.io/badge/📄_Ver_PDF-Data_cleaning-0A66C2?style=for-the-badge)](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/master/Material/03%20-%20Data%20cleaning.pdf)
 [![Ver PDF](https://img.shields.io/badge/📄_Ver_PDF-Transformación_de_datos-0A66C2?style=for-the-badge)](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/master/Material/03%20-%20Transformaci%C3%B3n%20de%20datos.pdf)
+[![Ver PDF](https://img.shields.io/badge/📝_Ver_PDF-Ejercicios_Clase_4-6E40C9?style=for-the-badge)](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/master/Ejercicios/Ejercicios%20Clase%203-4.pdf)
 [![Abrir en Colab](https://img.shields.io/badge/📓_Google_Colab-Clase_4-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white)](https://colab.research.google.com/drive/1_gDF8pJL1nT8uR4utQ8N-Lx-4gwa8EPS?usp=sharing)
 
 #### <a id="clase-4-etl"></a><font color="#1A7F37">El proceso de análisis: ETL y la etapa de limpieza</font>
@@ -479,6 +480,9 @@ Las transformaciones permiten optimizar el análisis: trabajar con otras distrib
 <details>
 <summary><a id="clase-5"></a><font color="#1A7F37"><strong>Clase 5 — 25/9 · Análisis exploratorio de datos y estadística descriptiva</strong></font></summary>
 
+[![Ver PDF](https://img.shields.io/badge/📄_Ver_PDF-Análisis_estadístico-0A66C2?style=for-the-badge)](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/master/Material/04%20-%20An%C3%A1lisis%20estad%C3%ADstico-1.pdf)
+[![Ver PDF](https://img.shields.io/badge/📝_Ver_PDF-Ejercicios_Clase_5-6E40C9?style=for-the-badge)](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/master/Ejercicios/ejercicios%20clase%204-6.pdf)
+
 *(Esta clase corresponde al tema "Análisis exploratorio de datos y estadística descriptiva" del cronograma original, previsto para el 18/9, pero se dictó efectivamente el 25/9 — el tema "Visualización de datos", originalmente del 25/9, quedó pendiente para después del parcial.)*
 
 #### <a id="clase-5-frecuencias"></a><font color="#1A7F37">Primera aproximación: análisis de frecuencias</font>
@@ -562,7 +566,7 @@ Técnicas más avanzadas de análisis multivariado —como el análisis de compo
 
 > *⚠️ Toda esta sección es información directa sobre el primer parcial, dada explícitamente en esta clase.*
 
-- **Modalidad:** presencial, en el aula 308, escrito con hoja y lapicera. No se puede usar celular ni inteligencia artificial. No hay "modelo" de parcial previo.
+- **Modalidad:** presencial, escrito con hoja y lapicera. No se puede usar celular ni inteligencia artificial. No hay "modelo" de parcial previo.
 - **Formato:** 100% teórico — combina preguntas de opción múltiple y de desarrollo. No incluye cálculos ni consignas de programar código.
 - **Duración estimada:** no debería insumir más de media hora.
 - **Temario:** todo lo visto hasta esta clase inclusive — es decir, los cinco temas dados hasta acá (conceptos básicos, Numpy, Pandas, data cleaning, y esta clase de estadística descriptiva). **La visualización de datos NO entra**, porque todavía no se llegó a esa clase.
@@ -667,7 +671,9 @@ Técnicas más avanzadas de análisis multivariado —como el análisis de compo
 
 **Obligatoria**
 - Chan, D., Badano, C., Rey, A. (2019). *Análisis inteligente de datos con lenguaje R* (pp. 1-73). edUTecNe. — se ven los dos primeros capítulos (introducción a la minería de datos e introducción al análisis de datos); es la referencia conceptual "de cabecera" de la materia, con ejemplos en R.
+  [![Ver PDF](https://img.shields.io/badge/📄_Ver_PDF-AID_2022-0A66C2?style=for-the-badge)](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/master/Material/AID%202022.pdf)
 - McKinney, W. (2023). *Python para análisis de datos*. Ediciones Anaya Multimedia. (Trabajo original 2022) — el autor es el creador de Pandas; se usa más como referencia práctica de Python que conceptual.
+  [![Ver PDF](https://img.shields.io/badge/📄_Ver_PDF-Python_para_el_análisis_de_datos-0A66C2?style=for-the-badge)](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/master/Material/Python%20para%20el%20an%C3%A1lisis%20de%20datos.pdf)
 
 **Optativa**
 - Mitchell, T. (1997). *Machine Learning*. McGraw Hill.
@@ -686,6 +692,8 @@ Técnicas más avanzadas de análisis multivariado —como el análisis de compo
 Introducción al Análisis de Datos
 ├── Ejercicios
 │   ├── 02 - Ejercicios Clase 2-1.pdf
+│   ├── Ejercicios Clase 3-4.pdf
+│   ├── ejercicios clase 4-6.pdf
 │   └── EPH_usu_3_Trim_2024_txt
 │       ├── usu_hogar_T324.txt
 │       └── usu_individual_T324.txt
@@ -696,7 +704,10 @@ Introducción al Análisis de Datos
     ├── 02 - Clase 2 Pandas.pdf
     ├── 03 - Data cleaning.pdf
     ├── 03 - Transformación de datos.pdf
-    └── cronograma.png
+    ├── 04 - Análisis estadístico-1.pdf
+    ├── AID 2022.pdf
+    ├── cronograma.png
+    └── Python para el análisis de datos.pdf
 ```
 
 Cada nueva clase se agrega a `Material/` numerada en orden (uno o varios PDFs por clase, según corresponda), y sus ejercicios (si los hay) a `Ejercicios/` con el mismo criterio de numeración.
