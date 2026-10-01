@@ -7,7 +7,11 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
 <p align="center">
 
 [![Abrir en Colab](https://img.shields.io/badge/📓_Google_Colab-Acceso_directo-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white)](https://colab.research.google.com/drive/1x-5Rp6Erfq18CL7-0ANoI4189KSpoTMt?usp=sharing)
-[![Ver Guía de Estudio](https://img.shields.io/badge/📘_Guía_de_Estudio-Ver-2EA44F?style=for-the-badge)](https://github.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/blob/master/Material/Guia_Estudio_Analisis_de_Datos.md)
+
+**📚 Resúmenes — para el primer parcial**
+
+[![Ver Guía de Estudio](https://img.shields.io/badge/📘_Guía_de_Estudio-Primer_parcial-2EA44F?style=for-the-badge)](https://github.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/blob/master/Material/Guia_Estudio_Analisis_de_Datos.md)
+[![Ver Guía de Estudio Extendida](https://img.shields.io/badge/📗_Guía_Extendida-Primer_parcial-2EA44F?style=for-the-badge)](https://github.com/LautaroSantiago/Introduccion-Analisis-Datos-UTN/blob/master/Material/Guia_Estudio_Analisis_de_Datos_Extendida.md)
 
 </p>
 
@@ -708,6 +712,7 @@ Introducción al Análisis de Datos
     ├── 04 - Análisis estadístico-1.pdf
     ├── AID 2022.pdf
     ├── cronograma.png
+    ├── Guia_Estudio_Analisis_de_Datos_Extendida.md
     ├── Guia_Estudio_Analisis_de_Datos.md
     └── Python para el análisis de datos.pdf
 ```
