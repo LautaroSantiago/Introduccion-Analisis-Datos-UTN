@@ -22,6 +22,7 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
 - [<font color="#8250DF"><strong>Funcionamiento de la materia</strong></font>](#funcionamiento)
   - [<font color="#1A7F37">Modalidad y criterios de evaluación</font>](#funcionamiento-modalidad)
   - [<font color="#1A7F37">Exámenes</font>](#funcionamiento-examenes)
+    - [<font color="#9A6700">Repaso del primer parcial (dado en la Clase 7) y temario del recuperatorio</font>](#funcionamiento-examenes-repaso)
   - [<font color="#1A7F37">Cronograma de clases</font>](#funcionamiento-cronograma)
   - [<font color="#1A7F37">Bibliografía</font>](#funcionamiento-bibliografia)
   - [<font color="#1A7F37">Herramientas</font>](#funcionamiento-herramientas)
@@ -71,7 +72,14 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
   - [<font color="#1A7F37">Análisis multivariado</font>](#clase-5-multivariado)
   - [<font color="#9A6700">Notas de la clase — información del primer parcial</font>](#clase-5-notas)
 - [<font color="#9A6700"><strong>🟣 2/10 · Primer parcial teórico</strong></font>](#eval-2-10)
-- [<font color="#8250DF"><strong>Clase 7 — 9/10 · Análisis de datos con R</strong></font>](#clase-7) *(pendiente)*
+- [<font color="#8250DF"><strong>Clase 7 — 9/10 · Visualización de datos</strong></font>](#clase-7)
+  - [<font color="#1A7F37">Repaso del primer parcial</font>](#clase-7-repaso)
+  - [<font color="#1A7F37">Matplotlib: paradigma funcional y orientado a objetos</font>](#clase-7-matplotlib)
+  - [<font color="#1A7F37">Gráficos univariados: histograma, gráfico de barras y gráfico de densidad</font>](#clase-7-univariados)
+  - [<font color="#1A7F37">Gráficos bivariados: dispersión y líneas</font>](#clase-7-bivariados)
+  - [<font color="#9A6700">Gráfico de cajas (boxplot)</font>](#clase-7-boxplot)
+  - [<font color="#1A7F37">Seaborn: gráficos avanzados en pocas líneas</font>](#clase-7-seaborn)
+  - [<font color="#1A7F37">Trabajo práctico final (segundo parcial)</font>](#clase-7-tp-final)
 - [<font color="#9A6700"><strong>🟣 16/10 · Recuperatorio primer parcial</strong></font>](#eval-16-10)
 - [<font color="#8250DF"><strong>Clase 8 — 23/10 · Integración de fuentes / SQL con pandas / Cassandra</strong></font>](#clase-8) *(pendiente)*
 - [<font color="#8250DF"><strong>Clase 9 — 30/10 · Conceptos básicos del modelado de datos</strong></font>](#clase-9) *(pendiente)*
@@ -100,11 +108,30 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
 | Instancia | Fecha | Detalle |
 |---|---|---|
 | Primer parcial | 2/10 | Teórico y virtual |
-| Recuperatorio 1er parcial | 16/10 | — |
-| Segundo parcial (TP final) | — | Informe utilizando las bases de la Encuesta Permanente de Hogares (INDEC) |
-| Defensa TP final | 27/11 | — |
+| Recuperatorio 1er parcial | 16/10 | Presencial. *⚠️ Mismos temas y misma modalidad que el primer parcial, sumando el contenido de la [Clase 7](#clase-7) (visualización de datos).* |
+| Segundo parcial (TP final) | Entrega 27/11 | Informe grupal (3 personas) utilizando las bases de la Encuesta Permanente de Hogares (INDEC). No se evalúa código, sí la aplicación conceptual. |
+| Corrección TP final | 4/12 | Última clase — defensa individual y oral (no obligatoria para todos; el profesor puede citar puntualmente a quien lo considere) |
 | Recuperatorio TP final | 4/12 | — |
 | Finales / última instancia de recuperatorio | 11/12 | Examen integrador (nota máx. 4) para quienes no regularizaron |
+
+#### <a id="funcionamiento-examenes-repaso"></a><font color="#9A6700">Repaso del primer parcial (dado en la Clase 7 — 9/10) y temario del recuperatorio</font>
+
+> *⚠️ Al inicio de la Clase 7 (9/10) el profesor hizo un repaso completo de las preguntas del primer parcial, aclarando cuáles eran las respuestas correctas. El recuperatorio (16/10) tiene los mismos temas y la misma modalidad presencial que el primer parcial, pero ahora incluye además el contenido dictado ese mismo día: visualización de datos (ver [Clase 7](#clase-7)).*
+
+Puntos aclarados en el repaso, por pregunta:
+
+- **Pregunta 1 (ambos temas):** teorema central del límite o ley de los grandes números, según el tema que haya tocado (contenido de la [Clase 1](#clase-1)).
+- **Pregunta 2 — clasificación del análisis de datos:** la consigna pedía la clasificación según **cantidad de variables** (univariado / bivariado / multivariado), no la clasificación de tipos de variable (cualitativa/cuantitativa). Fue el error más repetido.
+- **Gráfico o matriz de correlación:** había que explicar la lógica de construcción (se basa en la correlación de Pearson), interpretar los colores (a mayor intensidad, mayor asociación/correlación lineal; más cerca de cero, ausencia de asociación) e identificar las variables con mayor y menor asociación según el gráfico dado.
+- **Big Data:** se pedía la definición por las V (Volumen, Variedad y Velocidad, más Veracidad y Valor). *⚠️ Trampa marcada explícitamente en el parcial: "versátil" NO es una de las V.*
+- **Numpy — ndarray:** sus arrays están altamente optimizados porque ocupan memoria de tamaño fijo y en espacios contiguos, lo cual acelera el procesamiento y reduce el espacio ocupado en memoria.
+- **Minería de datos según Chan, Badano y Rey:** utilización obligatoria de herramientas informáticas, técnicas exploratorias y procedimiento inductivo (cuadro comparativo de la [Clase 1](#clase-1-vs-mineria)) — no hacía falta desarrollar, solo marcar las opciones correctas.
+- **Valores duplicados:** deben eliminarse (contenido de la clase de data cleaning).
+- **Correlación entre variables cuantitativas:** se mide con correlación de Pearson o de Spearman (Spearman usa rangos en lugar de valores numéricos, por lo que es menos sensible a valores extremos; ambas miden lo mismo y dan resultados parecidos).
+- **No respuesta:** puede ser de tres tipos; no deben eliminarse los registros sin respuesta, sí deben hacerse tratamientos sobre ellos.
+- **Pandas:** es una librería de Python con dos clases principales, *Series* (usa índices junto a un ndarray) y *DataFrame* (orientado a datos bidimensionales, permite trabajar con fechas, strings, etc.).
+- **Correlación para variables categóricas:** se usa el coeficiente V de Cramer.
+- **Clasificación de variables (ejemplo del parcial):** la distancia entre dos estrellas es un ejemplo de variable cuantitativa continua.
 
 ### <a id="funcionamiento-cronograma"></a><font color="#1A7F37">Cronograma de clases</font>
 
@@ -582,10 +609,9 @@ Técnicas más avanzadas de análisis multivariado —como el análisis de compo
 </details>
 
 <details>
-<summary><font color="#1A7F37">Clase 6 — 25/9 · Visualización de datos</font></summary>
+<summary><a id="clase-6"></a><font color="#1A7F37">Clase 6 — 25/9 · Visualización de datos</font></summary>
 
-*Pendiente — este tema se corrió para después del primer parcial (ver nota en la [Clase 5](#clase-5)).*
-
+*Este tema finalmente se dictó el 9/10, en la [Clase 7](#clase-7) — se corrió para después del primer parcial.*
 
 </details>
 
@@ -597,9 +623,72 @@ Técnicas más avanzadas de análisis multivariado —como el análisis de compo
 </details>
 
 <details>
-<summary><a id="clase-7"></a><font color="#1A7F37"><strong>Clase 7 — 9/10 · Análisis de datos con R</strong></font></summary>
+<summary><a id="clase-7"></a><font color="#1A7F37"><strong>Clase 7 — 9/10 · Visualización de datos</strong></font></summary>
 
-*Pendiente.*
+> *Nota: en el cronograma original, para esta fecha figuraba "Análisis de datos con R". Sin embargo, la clase del 9/10 se destinó al repaso del primer parcial y al dictado de Visualización de datos — el tema que había quedado pendiente de la [Clase 6](#clase-6) (25/9), corrido para después del parcial. "Análisis de datos con R" queda pendiente para una clase posterior.*
+
+#### <a id="clase-7-repaso"></a><font color="#1A7F37">Repaso del primer parcial</font>
+
+Al comienzo de la clase se hizo un repaso completo de las preguntas del primer parcial, con las respuestas correctas y las confusiones más comunes. El detalle completo está en la sección [Exámenes](#funcionamiento-examenes-repaso), junto con los temas que va a incluir el recuperatorio.
+
+#### <a id="clase-7-matplotlib"></a><font color="#1A7F37">Matplotlib: paradigma funcional y orientado a objetos</font>
+
+**Matplotlib** es la librería base (una API) para generar gráficos en Python. Por convención se importa como `plt`. Soporta distintos backends de interfaz gráfica y permite exportar los gráficos a archivos (JPG, PNG, etc.).
+
+Permite construir gráficos con dos paradigmas:
+- **Funcional:** llamando funciones directamente sobre el módulo (ej. `plt.plot(...)`).
+- **Orientado a objetos:** se crea un objeto de la clase `Figure`, y sobre ese objeto se generan los ejes y los gráficos.
+
+Ambos paradigmas ofrecen funciones comunes para mostrar (`show`) y cerrar (`close`) gráficos, y para modificar etiquetas de los ejes, títulos, etc.
+
+> *Repaso de un concepto del primer cuatrimestre (no es pregunta de parcial): el paradigma funcional se apoya en el concepto de "ciudadanos de primera clase" — en los lenguajes que lo permiten, las funciones pueden tratarse como objetos: pueden pasarse como parámetro de otras funciones y pueden ser devueltas como resultado de una función. Esto es lo que habilita, entre otras cosas, el uso de funciones lambda en Python.*
+
+#### <a id="clase-7-univariados"></a><font color="#1A7F37">Gráficos univariados: histograma, gráfico de barras y gráfico de densidad</font>
+
+- **Histograma:** visualiza las frecuencias de la distribución de una variable **cuantitativa continua**. Se construye agrupando los valores en intervalos (*bins*); las barras quedan pegadas unas a otras porque la separación entre grupos es artificial — hay continuidad en la variable. La cantidad de intervalos elegida cambia mucho la forma final del gráfico.
+- **Gráfico de barras:** visualmente muy parecido al histograma (casi idéntico), pero se usa para variables **cualitativas**. A diferencia del histograma, las barras están separadas entre sí, porque representan categorías discretas sin continuidad entre ellas.
+  > *⚠️ Posible pregunta de parcial: identificar si un gráfico es un histograma o un gráfico de barras — la pista está en si las barras están pegadas (histograma, variable continua) o separadas (barras, variable cualitativa).*
+- **Gráfico de densidad:** una versión más avanzada del histograma. En lugar de barras, construye una curva suavizada (mediante una técnica llamada estimación de densidad del núcleo) que permite aproximar visualmente si una distribución se acerca a una normal. Puede superponerse con un histograma para comparar ambas representaciones.
+
+Estos tres gráficos son **univariados**: analizan la frecuencia de una sola variable a la vez.
+
+#### <a id="clase-7-bivariados"></a><font color="#1A7F37">Gráficos bivariados: dispersión y líneas</font>
+
+- **Diagrama de dispersión (scatter):** ubica cada registro como un punto según el valor de dos variables. En su forma más simple no distingue cuántos registros caen en un mismo punto — se le puede agregar tamaño a los puntos para representar la cantidad de registros superpuestos en cada posición. Es una primera aproximación bivariada a los datos.
+- **Gráfico de líneas:** también bivariado. Se asume que la variable del eje X es la variable independiente y ordenadora — habitualmente es tiempo, pero puede ser cualquier otra variable con un orden lógico (ej. altura sobre el nivel del mar).
+  > *⚠️ Si la variable del eje X no tiene una relación de orden lógica con la variable graficada (por ejemplo, un ID), el gráfico de líneas no tiene sentido — queda como un trazado sin ningún valor analítico.*
+
+#### <a id="clase-7-boxplot"></a><font color="#9A6700">Gráfico de cajas (boxplot)</font>
+
+> *⚠️ El profesor remarcó que suele tomar este gráfico tanto en parciales como en finales.*
+
+- Se construye con **medidas de posición**: el primer cuartil (Q1), la mediana (Q2) y el tercer cuartil (Q3).
+  > *⚠️ Aclaración explícita y marcada como pregunta de parcial: la línea del medio de la caja es la **mediana**, no la media. La mediana es, a la vez, medida de posición y medida de tendencia central.*
+- La caja en sí representa el **rango intercuartílico** (RIC = Q3 − Q1), que es una medida de dispersión.
+- Los **bigotes** se calculan como Q3 + 1,5×RIC (límite superior) y Q1 − 1,5×RIC (límite inferior). Si no hay datos hasta ese límite, el bigote se corta antes de llegar a él.
+- Los valores que quedan por fuera de los bigotes se consideran **valores atípicos** (una definición útil, aunque no absoluta).
+- Es una herramienta muy buena para detectar valores atípicos a nivel univariado. No tiene por qué ser simétrico: puede no tener uno de los dos bigotes, dependiendo de la distribución.
+- *Aparte, sin entrar en la materia:* el gráfico de velas (usado en finanzas) se parece visualmente a una caja, pero sigue otra lógica (precio de apertura, cierre, máximo y mínimo) — no es el mismo gráfico ni se usa en análisis de datos como se ve en la cursada.
+
+#### <a id="clase-7-seaborn"></a><font color="#1A7F37">Seaborn: gráficos avanzados en pocas líneas</font>
+
+**Seaborn** (se importa por convención como `sns`) es una librería de más alto nivel, integrada tanto con matplotlib como con pandas (funciona directamente con `Series` y `DataFrame`). Ofrece estilos y paletas de color prediseñados — algo que no es azaroso: está estudiado qué colores combinan bien entre sí — y permite construir gráficos complejos en muy pocas líneas de código.
+
+- **Matriz de diagramas de dispersión (pairplot):** genera un gráfico por cada combinación de variables numéricas (resultado espejado). En la diagonal, donde cada variable se compara consigo misma (análisis univariado), aparecen histogramas; fuera de la diagonal, al ser análisis bivariado, aparecen dispersogramas.
+- **Correlograma / mapa de calor de correlación:** el mismo tipo de gráfico ya visto para el primer parcial — una cuadrícula de colores donde la intensidad representa el grado de asociación entre variables.
+- **Catplot:** permite construir gráficos (por ejemplo, boxplots) separados por categorías, útil para comparar subgrupos dentro de un mismo análisis.
+- **Gráficos de asociación (jointplot):** combinan en un solo gráfico un diagrama de dispersión, histogramas o curvas de densidad en los bordes, y la recta de correlación — un resumen completo de la relación entre dos variables y de su distribución individual.
+- **Gráfico de violín:** similar al boxplot pero incorporando densidad, lo que permite observar la forma completa de la distribución (por ejemplo, identificar la moda) además de las medidas de posición.
+- **Gráfico de enjambre (swarmplot):** muestra cada registro como un punto individual, evitando que se superpongan entre sí, para poder apreciar la concentración real de los datos — a diferencia de un diagrama de dispersión simple, donde un solo punto puede representar muchos registros ocultos.
+
+#### <a id="clase-7-tp-final"></a><font color="#1A7F37">Trabajo práctico final (segundo parcial)</font>
+
+- El segundo parcial **no es un examen escrito**: es un **Trabajo Práctico Final** grupal (grupos de 3 personas), con entrega de un informe escrito usando las bases de la Encuesta Permanente de Hogares (EPH, INDEC).
+- Se evalúa la **aplicación conceptual** de lo visto en la materia — no se evalúa el código en sí.
+- La consigna se sube recién **después del recuperatorio del primer parcial** (16/10), para no solaparla con el estudio del recuperatorio.
+- **Primera entrega:** 27/11. Si hay errores, se marcan correcciones a resolver para el 4/12 (última clase).
+- La **defensa es individual y oral**, pero no obligatoria para todos los integrantes del grupo — el profesor puede citar puntualmente a quienes tengan un trabajo "al borde" para preguntarles sobre decisiones tomadas.
+- Recomendación del profesor: no acumular los ejercicios prácticos de cada clase, porque anticipan buena parte de lo que después hay que resolver en el trabajo práctico final.
 
 </details>
 
