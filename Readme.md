@@ -114,7 +114,8 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
 | Recuperatorio TP final | 4/12 | — |
 | Finales / última instancia de recuperatorio | 11/12 | Examen integrador (nota máx. 4) para quienes no regularizaron |
 
-#### <a id="funcionamiento-examenes-repaso"></a><font color="#9A6700">Repaso del primer parcial (dado en la Clase 7 — 9/10) y temario del recuperatorio</font>
+<details>
+<summary><a id="funcionamiento-examenes-repaso"></a><font color="#9A6700"><strong>Repaso del primer parcial (dado en la Clase 7 — 9/10) y temario del recuperatorio</strong></font></summary>
 
 > *⚠️ Al inicio de la Clase 7 (9/10) el profesor hizo un repaso completo de las preguntas del primer parcial, aclarando cuáles eran las respuestas correctas. El recuperatorio (16/10) tiene los mismos temas y la misma modalidad presencial que el primer parcial, pero ahora incluye además el contenido dictado ese mismo día: visualización de datos (ver [Clase 7](#clase-7)).*
 
@@ -132,6 +133,8 @@ Puntos aclarados en el repaso, por pregunta:
 - **Pandas:** es una librería de Python con dos clases principales, *Series* (usa índices junto a un ndarray) y *DataFrame* (orientado a datos bidimensionales, permite trabajar con fechas, strings, etc.).
 - **Correlación para variables categóricas:** se usa el coeficiente V de Cramer.
 - **Clasificación de variables (ejemplo del parcial):** la distancia entre dos estrellas es un ejemplo de variable cuantitativa continua.
+
+</details>
 
 ### <a id="funcionamiento-cronograma"></a><font color="#1A7F37">Cronograma de clases</font>
 
