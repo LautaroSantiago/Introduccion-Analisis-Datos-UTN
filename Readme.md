@@ -81,7 +81,13 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
   - [<font color="#1A7F37">Seaborn: gráficos avanzados en pocas líneas</font>](#clase-7-seaborn)
   - [<font color="#1A7F37">Trabajo práctico final (segundo parcial)</font>](#clase-7-tp-final)
 - [<font color="#9A6700"><strong>🟣 16/10 · Recuperatorio primer parcial</strong></font>](#eval-16-10)
-- [<font color="#8250DF"><strong>Clase 8 — 23/10 · Integración de fuentes / SQL con pandas / Cassandra</strong></font>](#clase-8) *(pendiente)*
+- [<font color="#8250DF"><strong>Clase 8 — 23/10 · Lenguaje R y bases de datos NoSQL</strong></font>](#clase-8)
+  - [<font color="#9A6700">Trabajo práctico final: detalles de la consigna</font>](#clase-8-tp-consigna)
+  - [<font color="#1A7F37">Lenguaje R: características y comparación con Python</font>](#clase-8-r)
+  - [<font color="#1A7F37">Visualización y el universo tidyverse</font>](#clase-8-tidyverse)
+  - [<font color="#1A7F37">Bases de datos NoSQL: el teorema CAP</font>](#clase-8-cap)
+  - [<font color="#1A7F37">Tipos de bases de datos NoSQL</font>](#clase-8-tipos-nosql)
+  - [<font color="#1A7F37">Ventajas de las bases de datos columnares (Cassandra)</font>](#clase-8-columnares)
 - [<font color="#8250DF"><strong>Clase 9 — 30/10 · Conceptos básicos del modelado de datos</strong></font>](#clase-9) *(pendiente)*
 - [<font color="#8250DF"><strong>Clase 10 — 6/11 · Modelos de clasificación</strong></font>](#clase-10) *(pendiente)*
 - [<font color="#8250DF"><strong>Clase 11 — 13/11 · Modelos de regresión</strong></font>](#clase-11) *(pendiente)*
@@ -686,12 +692,14 @@ Estos tres gráficos son **univariados**: analizan la frecuencia de una sola var
 
 #### <a id="clase-7-tp-final"></a><font color="#1A7F37">Trabajo práctico final (segundo parcial)</font>
 
-- El segundo parcial **no es un examen escrito**: es un **Trabajo Práctico Final** grupal (grupos de 3 personas), con entrega de un informe escrito usando las bases de la Encuesta Permanente de Hogares (EPH, INDEC).
+- El segundo parcial **no es un examen escrito**: es un **Trabajo Práctico Final** grupal (grupos de **3 o 4 personas**), con entrega de un informe escrito usando las bases de la Encuesta Permanente de Hogares (EPH, INDEC).
 - Se evalúa la **aplicación conceptual** de lo visto en la materia — no se evalúa el código en sí.
 - La consigna se sube recién **después del recuperatorio del primer parcial** (16/10), para no solaparla con el estudio del recuperatorio.
 - **Primera entrega:** 27/11. Si hay errores, se marcan correcciones a resolver para el 4/12 (última clase).
 - La **defensa es individual y oral**, pero no obligatoria para todos los integrantes del grupo — el profesor puede citar puntualmente a quienes tengan un trabajo "al borde" para preguntarles sobre decisiones tomadas.
 - Recomendación del profesor: no acumular los ejercicios prácticos de cada clase, porque anticipan buena parte de lo que después hay que resolver en el trabajo práctico final.
+
+> *El detalle completo de la consigna, dado en la [Clase 8](#clase-8-tp-consigna), está más abajo.*
 
 </details>
 
@@ -703,9 +711,65 @@ Estos tres gráficos son **univariados**: analizan la frecuencia de una sola var
 </details>
 
 <details>
-<summary><a id="clase-8"></a><font color="#1A7F37"><strong>Clase 8 — 23/10 · Integración de fuentes / SQL con pandas / Cassandra</strong></font></summary>
+<summary><a id="clase-8"></a><font color="#1A7F37"><strong>Clase 8 — 23/10 · Lenguaje R y bases de datos NoSQL</strong></font></summary>
 
-*Pendiente.*
+> *Nota: en el cronograma original esta fecha figuraba como "Integración de fuentes / SQL con pandas / Cassandra". La clase del 23/10 se dedicó al detalle de la consigna del trabajo práctico final, a una introducción al lenguaje R y a una introducción teórica a las bases de datos NoSQL (teorema CAP y Cassandra, en reemplazo de "SQL con pandas").*
+
+#### <a id="clase-8-tp-consigna"></a><font color="#9A6700">Trabajo práctico final: detalles de la consigna</font>
+
+- Deben elegir **dos aglomerados distintos** relevados por la EPH (ej. Gran Córdoba y Gran Rosario, o partidos del Gran Buenos Aires), filtrarlos y realizar estimaciones propias (ej. tasa de desocupación, tasa de empleo, u otras que el grupo considere pertinentes).
+  > *Un aglomerado es una mancha urbana (no coincide con una ciudad ni con un partido/división política); no está delimitado por definiciones políticas, por lo que va creciendo censo a censo junto con la población.*
+- El objetivo es demostrar que el grupo es capaz de levantar una base de microdatos, procesarla, sacar conclusiones y "contar una historia" con los datos — no se va a evaluar el código ni el lenguaje elegido para hacerlo (Python, R, u otro).
+- **Contenido mínimo requerido (aprobación no directa):** capacidad de análisis univariado, análisis multivariado y visualización de gráficos — todo lo visto hasta el momento en la cursada.
+- El informe debe incluir **texto, gráficos y tablas**, pero resumidos: no se deben incluir tablas extensas (ej. de 50 filas) solo por incluirlas. El criterio general es que lo presentado haga más accesible la información, nunca más engorrosa su interpretación.
+  > *⚠️ Mencionado explícitamente como criterio de corrección: la información presentada tiene que ser accesible para quien lee el informe.*
+- **Aprobación directa:** además de lo anterior, se exige demostrar conocimientos de modelado estadístico (contenido de las últimas clases de la cursada), con un **R² superior a 0,3**, sin aplicar ninguna transformación a la variable original.
+- La consigna se publica en el campus en los días posteriores a esta clase.
+- El 27/11 (primera entrega) el profesor marca las correcciones si las hay, para volver a presentar el trabajo corregido aproximadamente para el 1/12, antes de la última clase (4/12).
+- Quienes no lleguen a regularizar la materia con los parciales, pueden hacerlo igualmente el 11/12 en el examen integrador (ver [Exámenes](#funcionamiento-examenes)).
+
+#### <a id="clase-8-r"></a><font color="#1A7F37">Lenguaje R: características y comparación con Python</font>
+
+> *Analogía que compartió el profesor: R es como un tractor — un vehículo desarrollado para una tarea muy específica (el análisis de datos), pero inútil para cualquier otra cosa (nadie se sube a un tractor para viajar por la autopista). Python, en cambio, es más como una 4x4: sirve para todo, aunque a veces sea menos práctico que una herramienta específica.*
+
+- R es un lenguaje desarrollado en los laboratorios Bell (los mismos donde se desarrollaron Unix y C), como alternativa de **código abierto** a un lenguaje previo con licencia llamado S. Resurge en la década del 90 y hacia 2012-2013 llegó a estar entre los 10 lenguajes más usados — lugar que después ocupó Python, en gran parte gracias a Pandas, una librería inspirada en R.
+- Es un lenguaje **multiparadigma**: aplica el paradigma estructurado y el funcional con comodidad; también permite orientación a objetos, aunque sus protocolos para esto son poco prácticos y no es el uso habitual del lenguaje.
+- **Tipos de datos atómicos:** numéricos, enteros, caracteres, números complejos, lógicos (booleanos) y **factor** — un tipo especial, propio de R, para trabajar con variables categóricas u ordinales, que no existe en Python/Pandas.
+  > *⚠️ Importancia remarcada en clase: si una variable categórica está codificada con números (ej. un código de aglomerado) y no se castea explícitamente a `factor` con `as.factor()`, R —y cualquier modelo que se aplique después— la va a tratar por defecto como una variable numérica, lo cual es incorrecto. Una variable de tipo `factor` no puede multiplicarse (R devuelve error), a diferencia de un vector numérico: esto es intencional, porque una variable categórica no debería admitir ese tipo de operación.*
+- **Estructuras de datos:** vectores (todos los elementos deben ser del mismo tipo — si se mezclan tipos, R fuerza la coerción de todos los elementos al mismo tipo; es conceptualmente similar a un `ndarray` de Numpy), listas (permiten elementos de distinto tipo, se crean con `list()`, pero no sirven para operaciones matemáticas vectoriales), secuencias (similares a `range()` de Python, aunque por defecto admiten también números decimales, no solo enteros), matrices, y **data frames** (muy similares al `DataFrame` de Pandas — de hecho, Pandas tomó buena parte de sus ideas de R).
+- La asignación de objetos se puede hacer con `<-` o con `=`, y las flechas pueden usarse en ambos sentidos.
+- Para consultar documentación de funciones, librerías o clases se usa la función `help()` o el signo de pregunta `?`.
+- Permite importar y exportar archivos de múltiples formatos (incluso algunos poco comunes como SAS, SPSS o Stata) y guardar objetos propios —un dataset o un modelo ya entrenado— en formato `RDS`.
+
+#### <a id="clase-8-tidyverse"></a><font color="#1A7F37">Visualización y el universo tidyverse</font>
+
+- **R base** permite graficar con funciones simples en pocas líneas (ej. `boxplot()` genera un gráfico de cajas con una sola línea).
+- **ggplot2** es una librería de más alto nivel para generar gráficos: construye un objeto y sobre ese objeto se van aplicando modificaciones hasta lograr el gráfico final. Su enfoque se extendió luego a otros lenguajes.
+- **tidyverse** es un conjunto de librerías (incluye ggplot2, dplyr, entre otras) pensado para popularizar R entre quienes no tienen formación informática, con una sintaxis concisa y el uso de **pipes** para encadenar funciones una detrás de otra — un concepto similar al de los pipes que existen en algunas versiones de SQL.
+- **R base vs. tidyverse:** R base tiene una curva de aprendizaje más difícil (recomendada para quienes ya tienen formación en programación) y sus herramientas están menos optimizadas; tidyverse tiende a usar algoritmos más veloces, especialmente útil al trabajar con grandes volúmenes de datos.
+- **RStudio** es el entorno de desarrollo creado específicamente para trabajar con R (se descarga, junto con R, desde la web de Posit). Permite gestionar archivos y proyectos, crear documentos dinámicos de tipo R Markdown (combina código R con texto en formato Markdown — el mismo formato que usan los README de GitHub), visualizar gráficos y gestionar paquetes. Su interfaz se organiza en cuatro paneles: script, consola, entorno y archivos/gráficos.
+
+#### <a id="clase-8-cap"></a><font color="#1A7F37">Bases de datos NoSQL: el teorema CAP</font>
+
+> *El profesor aclaró que este tema es introductorio y teórico, pensado para dar contexto de por qué existen las bases de datos NoSQL — no para profundizar en su funcionamiento.*
+
+- **Modelo ACID** (bases de datos relacionales): cada transacción debe cumplir cuatro propiedades — **Atómica** (se completa por entero o falla por entero), **Consistente** (cumple todas las restricciones de la base, como claves primarias y foráneas), **Aislada** (no interfiere con otras transacciones concurrentes) y **Durable** (una vez confirmada, es permanente). Ejemplo típico: una transferencia de dinero entre dos cuentas.
+- **Teorema CAP (o teorema de Brewer):** planteado como conjetura por Brewer y demostrado formalmente en un paper de 2002 de Gilbert y Lynch (MIT). Establece que es imposible que un servicio web garantice **siempre**, al mismo tiempo, tres propiedades: **C**onsistencia (de los datos), **A**vailability/disponibilidad, y **P**artition tolerance/tolerancia a particiones de la red.
+- De esta demostración surge una definición más flexible: si la red funciona correctamente, se garantizan consistencia y disponibilidad sin problema; si la red falla, debe garantizarse al menos el orden de las escrituras y que el sistema devuelva el último estado conocido. Esto se vincula al concepto de **"conexión T"**: si la conexión se restablece dentro de un cierto tiempo T, la consistencia queda restaurada en ese lapso — es decir, el sistema no estará disponible y consistente siempre, pero sí eventualmente.
+- Conclusión del paper: es imposible proveer datos de forma confiable con consistencia atómica cuando hay particiones en la red; solo es posible garantizar **dos de las tres propiedades** (C, A, P) al mismo tiempo. De ahí surgen las bases de datos NoSQL, que sacrifican consistencia estricta a cambio de aceptar desactualizaciones temporales (de milisegundos, segundos o minutos) priorizando otras propiedades según el caso de uso.
+
+#### <a id="clase-8-tipos-nosql"></a><font color="#1A7F37">Tipos de bases de datos NoSQL</font>
+
+- **Documentales:** se construyen como documentos; priorizan consistencia y tolerancia a particiones (CP).
+- **Clave-valor / en memoria caché:** el ejemplo más conocido es Redis — prioriza velocidad extrema de lectura y escritura, asumiendo datos temporalmente desactualizados. Al trabajar en memoria RAM (caché) no hay persistencia real, por lo que suele complementarse con otro tipo de base de datos.
+- **Columnares:** el ejemplo es Cassandra (de Apache) — priorizan estar siempre disponibles para lectura y escritura, aunque en un momento dado algunos nodos no estén accesibles. Su característica principal es una arquitectura descentralizada ("masterless"), sin un nodo maestro único: la información se guarda de forma horizontal, distribuida entre distintos nodos.
+
+#### <a id="clase-8-columnares"></a><font color="#1A7F37">Ventajas de las bases de datos columnares (Cassandra)</font>
+
+- **Escalabilidad horizontal:** agregar capacidad es más simple y económico que la escalabilidad vertical típica de SQL (agregar más servidores/nodos en vez de potenciar un único servidor, cuyo costo de inversión crece mucho más).
+- **Lectura eficiente:** SQL siempre lee los registros completos y valida sus relaciones (claves foráneas, etc.), aunque solo se necesiten un par de columnas. Una base columnar puede traer únicamente las columnas necesarias, reduciendo el volumen de datos procesado — un paralelismo con la eficiencia de memoria que ya se había visto con Numpy en la [Clase 1](#clase-1).
+- **Tolerancia a fallos:** en SQL, si cae el nodo principal, se cae todo el sistema; en una base de datos columnar, si falla un nodo, el resto sigue operando con normalidad.
+- El balance entre consistencia, disponibilidad y tolerancia a particiones es **configurable**: por ejemplo, en Cassandra se puede exigir que cada transacción impacte en varios nodos a la vez (a costa de velocidad y de mayor probabilidad de fallo), según el criterio de quien administra la base de datos.
 
 </details>
 
