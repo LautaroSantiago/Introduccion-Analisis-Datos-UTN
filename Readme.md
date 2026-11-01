@@ -88,7 +88,15 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
   - [<font color="#1A7F37">Bases de datos NoSQL: el teorema CAP</font>](#clase-8-cap)
   - [<font color="#1A7F37">Tipos de bases de datos NoSQL</font>](#clase-8-tipos-nosql)
   - [<font color="#1A7F37">Ventajas de las bases de datos columnares (Cassandra)</font>](#clase-8-columnares)
-- [<font color="#8250DF"><strong>Clase 9 — 30/10 · Conceptos básicos del modelado de datos</strong></font>](#clase-9) *(pendiente)*
+- [<font color="#8250DF"><strong>Clase 9 — 30/10 · Conceptos básicos del modelado de datos</strong></font>](#clase-9)
+  - [<font color="#1A7F37">Modelado estadístico vs. aprendizaje automático</font>](#clase-9-estadistico-vs-automatico)
+  - [<font color="#1A7F37">Objetivos del análisis de datos: describir, inferir, predecir</font>](#clase-9-objetivos)
+  - [<font color="#9A6700">Siete criterios para clasificar modelos estadísticos</font>](#clase-9-criterios)
+  - [<font color="#1A7F37">Supervisado vs. no supervisado: clasificación, clustering y regresión</font>](#clase-9-supervisado-no-supervisado)
+  - [<font color="#9A6700">Árboles de decisión y sobreajuste</font>](#clase-9-arboles-sobreajuste)
+  - [<font color="#1A7F37">Redes neuronales: arquitectura básica</font>](#clase-9-redes-neuronales)
+  - [<font color="#1A7F37">Cómo se construye un modelo de aprendizaje supervisado</font>](#clase-9-construccion-modelo)
+  - [<font color="#9A6700">Cómo evaluar el rendimiento de un modelo: métricas y matriz de confusión</font>](#clase-9-evaluacion)
 - [<font color="#8250DF"><strong>Clase 10 — 6/11 · Modelos de clasificación</strong></font>](#clase-10) *(pendiente)*
 - [<font color="#8250DF"><strong>Clase 11 — 13/11 · Modelos de regresión</strong></font>](#clase-11) *(pendiente)*
 - [<font color="#8250DF"><strong>Clase 12 — 20/11 · Modelos de clustering</strong></font>](#clase-12) *(pendiente)*
@@ -776,7 +784,71 @@ Estos tres gráficos son **univariados**: analizan la frecuencia de una sola var
 <details>
 <summary><a id="clase-9"></a><font color="#1A7F37"><strong>Clase 9 — 30/10 · Conceptos básicos del modelado de datos</strong></font></summary>
 
-*Pendiente.*
+> *⚠️ Nota sobre la fecha de entrega del TP final: en esta clase el profesor mencionó como referencia "el 23" (aproximadamente tres semanas desde esta clase) al recordar la fecha de entrega, mientras que en clases anteriores había indicado el 27/11. Convendría confirmar la fecha exacta en el campus.*
+
+#### <a id="clase-9-estadistico-vs-automatico"></a><font color="#1A7F37">Modelado estadístico vs. aprendizaje automático</font>
+
+- El **modelado de datos** busca entender las relaciones que se establecen entre las variables de un dataset.
+- **Modelado estadístico tradicional:** para que su aplicación e interpretación sean válidas, es necesario garantizar el cumplimiento de ciertos **supuestos** — no son hipótesis sobre el fenómeno estudiado, sino supuestos estadísticos/matemáticos (ej. que la distribución de una variable sea normal, que la relación entre variables sea de tipo lineal). Si se cumplen, se toma como válido el modelo y como confiables sus coeficientes/parámetros. Puede aplicarse tanto a datasets chicos como grandes.
+- **Aprendizaje automático:** habla de algoritmos, no de personas analizando datos. En general evita imponer supuestos y está preparado para funcionar con cualquier tipo de datos, incluso no estructurados. A cambio, a medida que un modelo crece en complejidad va perdiendo transparencia e interpretabilidad — se va transformando en una "caja negra" (ej. una red neuronal: es imposible para una persona entender completamente qué sucede en su interior, no por falta de capacidad sino porque es inabarcable la cantidad de cálculos involucrados).
+- **Definición de aprendizaje automático (Mitchell):** un programa aprende de la experiencia E respecto de una tarea T y una medida de rendimiento P si su desempeño en T, medido por P, mejora con la experiencia E. Para un modelo, la "experiencia" se traduce en la cantidad de datos/casos disponibles para entrenarlo.
+- Ejemplo del salto de Chat GPT-2 a Chat GPT-3 (ya mencionado en la [Clase 1](#clase-1-ley-grandes-numeros)): GPT-2 se entrenó con 1.500 millones de parámetros (~40 GB de texto); GPT-3, con 175.000 millones de parámetros (~570 GB de texto, provenientes de un dataset de ~45 TB) — más de 100 veces la cantidad de datos de entrenamiento, lo que produjo un salto cualitativo en el rendimiento del modelo.
+
+#### <a id="clase-9-objetivos"></a><font color="#1A7F37">Objetivos del análisis de datos: describir, inferir, predecir</font>
+
+- **Objetivos meramente descriptivos:** analizar qué sucede con un conjunto de datos ya disponible (ej. un censo) usando gráficos, medias, medianas, frecuencias.
+- **Estadística inferencial:** a partir de una muestra (ej. una encuesta) busca obtener conclusiones que sean extrapolables a toda la población.
+- **Modelado estadístico / aprendizaje automático:** el objetivo pasa a ser **predecir** — estimar valores futuros o desconocidos a partir de un conjunto de datos conocido. Ejemplo cotidiano: el pronóstico del tiempo, que es un modelo probabilístico y, como tal, puede fallar.
+  > *⚠️ Remarcado en clase: todo modelo estadístico o probabilístico va a fallar en algún momento — eso es parte de su naturaleza. Por eso es importante que haya una persona con los conocimientos suficientes para detectar cuándo el modelo está fallando.*
+
+#### <a id="clase-9-criterios"></a><font color="#9A6700">Siete criterios para clasificar modelos estadísticos</font>
+
+> *⚠️ El profesor marcó explícitamente que esta lista de criterios puede ser pregunta de final: "¿Cuáles son los criterios de clasificación para los modelos?"*
+
+1. **Según la existencia de variable dependiente:** modelos **supervisados** (hay una variable dependiente/target que el modelo busca predecir o explicar) vs. **no supervisados** (no la hay — ej. clustering, que agrupa datos sin predecir ninguna variable).
+2. **Según el tipo de la variable dependiente** (cuando existe): si es **cualitativa**, se habla de modelos de **clasificación**; si es **cuantitativa**, de modelos de **regresión**.
+3. **Según la cantidad de variables independientes:** modelo **simple** (una sola variable independiente) vs. modelo **múltiple** (varias variables independientes).
+4. **Según el tipo de relación entre variables:** **lineal** (pendiente constante — ej. la regresión lineal) vs. **no lineal** (la pendiente varía según el punto del dominio — ej. relaciones de tipo cuadrático). Los modelos de aprendizaje automático, en general, pueden captar ambos tipos de relación.
+5. **Según la existencia de supuestos:** **paramétricos** (requieren el cumplimiento de supuestos para que su aplicación e interpretación sean válidas — ej. la regresión lineal exige que la relación sea lineal, que los errores sean independientes entre sí, que haya homocedasticidad, que los errores tengan distribución normal y que no exista colinealidad entre las variables independientes) vs. **no paramétricos** (no requieren el cumplimiento de ningún supuesto — ej. árboles de decisión, redes neuronales).
+6. **Según la arquitectura o el enfoque algorítmico:** regresiones, árboles de decisión, ensambles de árboles, redes neuronales, modelos de clustering, etc.
+7. **Según la forma de interacción con los datos:** modelos que aprenden de un conjunto de datos fijo, vs. **agentes**, que aprenden por **refuerzo** (reinforcement learning, usando gradiente descendente) de forma continua, eligiendo acciones de manera autónoma en función de "premios y castigos" matemáticos — un concepto muy vinculado a los modelos de IA actuales.
+
+#### <a id="clase-9-supervisado-no-supervisado"></a><font color="#1A7F37">Supervisado vs. no supervisado: clasificación, clustering y regresión</font>
+
+Ejemplo trabajado en clase con las variables peso y altura:
+
+- **Modelo de clasificación (supervisado):** clasifica entre "niño" y "adulto" — la variable dependiente es cualitativa.
+- **Clustering (no supervisado):** agrupa los mismos datos sin usar ninguna variable dependiente. Se construye con otra lógica matemática, pero puede llegar a un agrupamiento similar al del modelo de clasificación — con la diferencia de que no "etiqueta" los grupos resultantes (no hay una variable que indique a qué corresponde cada grupo).
+- **Modelo de regresión (supervisado):** ejemplo inversión → beneficio. La variable dependiente es cuantitativa. El modelo traza una línea que representa el valor esperado (la media) de la variable dependiente para cada valor de la variable independiente.
+
+#### <a id="clase-9-arboles-sobreajuste"></a><font color="#9A6700">Árboles de decisión y sobreajuste</font>
+
+- Ejemplo trabajado en clase: un árbol de decisión que predice el ingreso por jubilación de una persona a partir de variables como el nivel educativo y el aglomerado.
+- **Funcionamiento:** el árbol recorre las variables del dataset y, en cada una, prueba distintos "cortes" posibles. Para elegir el mejor corte utiliza el concepto de **entropía** (tomado de las ciencias naturales, asociado al desorden), quedándose con el corte que mejor separa los casos (valores altos de valores bajos, o categorías entre sí).
+- En el ejemplo, el primer corte del árbol fue por nivel educativo (universitario o no) — un resultado esperable. Los cortes siguientes (ej. por aglomerado) se van haciendo sobre porciones cada vez más chicas del dataset.
+- > *⚠️ Sobreajuste (overfitting):* al quedarse con cada vez menos casos en cada corte, el árbol puede verse fuertemente influenciado por valores extremos o casos aislados del dataset — en la práctica, "aprende de memoria" los datos de entrenamiento en lugar de generalizar correctamente. Es uno de los grandes déficits de este tipo de modelo, especialmente cuando se entrena con pocos datos. A mayor profundidad del árbol, mayor es la probabilidad de sobreajuste, porque cada corte sucesivo trabaja con menos casos.
+
+#### <a id="clase-9-redes-neuronales"></a><font color="#1A7F37">Redes neuronales: arquitectura básica</font>
+
+- Arquitectura básica: una capa de entrada, una o más capas ocultas, una capa de salida y una capa de pérdida (calculada, por ejemplo, mediante entropía cruzada).
+- Se habla de **deep learning** (aprendizaje profundo) cuando el modelo tiene como mínimo tres capas ocultas.
+- Es, de los tres tipos de modelo vistos en la clase (regresión, árbol de decisión, red neuronal), el más complejo desde el punto de vista matemático y el más "caja negra": no es posible entender por completo qué sucede en su interior —aunque con investigación y experimentación se puede ir aproximando esa comprensión.
+
+#### <a id="clase-9-construccion-modelo"></a><font color="#1A7F37">Cómo se construye un modelo de aprendizaje supervisado</font>
+
+- Se asume que ya se completaron las etapas previas del proceso de análisis (limpieza de datos, análisis exploratorio) y que, a partir de esa exploración, ya se seleccionaron las variables relevantes — esto se conoce como **selección de variables** o **ingeniería de variables**.
+- Ejemplo usado en la clase: el dataset *Iris*, donde se busca predecir la variedad de una flor (setosa, versicolor o virgínica) a partir del largo y ancho de su sépalo y de su pétalo.
+- **Partición del conjunto de datos:** para poder evaluar el rendimiento de un modelo hace falta partir de un conjunto de datos ya conocido (es decir, que ya incluya la variable target). Se separa en un **conjunto de entrenamiento** (ej. 70% de los casos) y un **conjunto de prueba/test** (ej. 30% restante).
+- Técnicas de muestreo para esta partición: muestreo aleatorio simple, **cross validation** (ej. dividir el dataset en cinco partes del 20%, entrenando cada vez con el 80% restante y probando sobre el 20% separado) o muestreo estratificado, según el objetivo del análisis.
+- Una vez particionado el dataset, se entrena el modelo con el conjunto de entrenamiento (las variables independientes junto con la variable dependiente de esos casos) y se genera una predicción sobre el conjunto de prueba, comparando el valor predicho por el modelo contra el valor real.
+
+#### <a id="clase-9-evaluacion"></a><font color="#9A6700">Cómo evaluar el rendimiento de un modelo: métricas y matriz de confusión</font>
+
+- La métrica a utilizar depende del objetivo del modelo — no es lo mismo predecir una enfermedad que un fraude bancario:
+  - **Detección de enfermedades:** se prioriza reducir los **falsos negativos** — decirle a una persona enferma que está sana es el peor error posible, porque puede llevar a que no reciba el tratamiento necesario. La métrica asociada es la **sensibilidad**.
+  - **Detección de fraude bancario:** se prioriza reducir los **falsos positivos** — acusar de fraude a alguien inocente trae consecuencias graves (bloqueo de cuenta, intervención judicial, etc.), por lo que se privilegia el principio de inocencia. La métrica asociada es la **precisión**.
+  - Existen métricas que combinan ambos criterios, como el **F1 Score**.
+- **Matriz de confusión:** forma gráfica de evaluar el rendimiento de un modelo de clasificación. En el eje Y se ubica el valor real y en el eje X el valor predicho; la diagonal representa los casos predichos correctamente. En una matriz de confusión bien resuelta, los colores más intensos (si se representa como mapa de calor) deberían concentrarse en la diagonal — si los errores fueran tan frecuentes como los aciertos, deberían tener una intensidad de color similar a la de la diagonal, no una menor.
 
 </details>
 
