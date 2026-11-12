@@ -97,7 +97,16 @@ Apuntes de cursada y material de clase de la materia **Introducción al Análisi
   - [<font color="#1A7F37">Redes neuronales: arquitectura básica</font>](#clase-9-redes-neuronales)
   - [<font color="#1A7F37">Cómo se construye un modelo de aprendizaje supervisado</font>](#clase-9-construccion-modelo)
   - [<font color="#9A6700">Cómo evaluar el rendimiento de un modelo: métricas y matriz de confusión</font>](#clase-9-evaluacion)
-- [<font color="#8250DF"><strong>Clase 10 — 6/11 · Modelos de clasificación</strong></font>](#clase-10) *(pendiente)*
+- [<font color="#8250DF"><strong>Clase 10 — 6/11 · Modelos de regresión</strong></font>](#clase-10)
+  - [<font color="#1A7F37">Modelos de regresión: introducción</font>](#clase-10-intro)
+  - [<font color="#1A7F37">Regresión lineal simple</font>](#clase-10-simple)
+  - [<font color="#9A6700">Supuestos de la regresión lineal</font>](#clase-10-supuestos)
+  - [<font color="#1A7F37">Coeficiente de determinación (R²)</font>](#clase-10-r2)
+  - [<font color="#9A6700">Regresión lineal múltiple</font>](#clase-10-multiple)
+  - [<font color="#1A7F37">R² ajustado</font>](#clase-10-r2-ajustado)
+  - [<font color="#1A7F37">Diagnóstico de los supuestos (después de construir el modelo)</font>](#clase-10-diagnostico)
+  - [<font color="#1A7F37">Regresión mediante árboles de decisión</font>](#clase-10-arboles)
+  - [<font color="#1A7F37">Métricas para comparar modelos de regresión</font>](#clase-10-metricas)
 - [<font color="#8250DF"><strong>Clase 11 — 13/11 · Modelos de regresión</strong></font>](#clase-11) *(pendiente)*
 - [<font color="#8250DF"><strong>Clase 12 — 20/11 · Modelos de clustering</strong></font>](#clase-12) *(pendiente)*
 - [<font color="#9A6700"><strong>🟣 27/11 · Defensa TP final</strong></font>](#eval-27-11)
@@ -853,9 +862,78 @@ Ejemplo trabajado en clase con las variables peso y altura:
 </details>
 
 <details>
-<summary><a id="clase-10"></a><font color="#1A7F37"><strong>Clase 10 — 6/11 · Modelos de clasificación</strong></font></summary>
+<summary><a id="clase-10"></a><font color="#1A7F37"><strong>Clase 10 — 6/11 · Modelos de regresión</strong></font></summary>
 
-*Pendiente.*
+> *Nota: en el cronograma original, la Clase 10 figuraba como "Modelos de clasificación" y la Clase 11 como "Modelos de regresión". En la práctica el orden se invirtió: el 6/11 se dictó regresión. Al cierre de la clase el profesor adelantó que la siguiente profundizará en árboles de decisión y regresión, que quizás no se vea clustering como estaba previsto, y que clasificación quedaría para la última clase.*
+
+#### <a id="clase-10-intro"></a><font color="#1A7F37">Modelos de regresión: introducción</font>
+
+- Los modelos de **regresión** estiman valores de una variable dependiente **cuantitativa continua**; los de **clasificación**, de una variable dependiente cualitativa (ej. regresión logística). Como en el TP final hay que predecir ingresos (variable cuantitativa medida en pesos), se usarán modelos de regresión.
+  > *⚠️ Condición del TP final reiterada en clase: el R² debe ser **superior a 0,3**, evaluado sobre la **variable original en su escala real (pesos), sin ninguna transformación**. Aunque una IA recomiende aplicar una transformación logarítmica al construir el modelo, la evaluación de si el modelo rinde o no debe hacerse sobre los valores originales.*
+- **Selección de variables:** antes de modelar hay que detectar qué variables están relacionadas entre sí. Una relación puede ser lineal (pendiente constante), no lineal (ej. una curva), o inexistente (en un dispersograma sin tendencia clara, las variables se asumen independientes y no sirven para construir un modelo útil). Herramientas ya vistas para detectarlo: correlación de Pearson o Spearman (variables cuantitativas), V de Cramer (categóricas) y el correlograma.
+
+#### <a id="clase-10-simple"></a><font color="#1A7F37">Regresión lineal simple</font>
+
+- Modelo para el vínculo de dos variables: X (variable predictora o covariable) e Y (variable dependiente o de respuesta). Se expresa como **Y = β₀ + β₁·X + e**, donde **e** es el error irreducible: todo modelo trae consigo un error, no existe el modelo perfecto.
+- Sin el error, es una función lineal: **β₀** es la ordenada al origen y **β₁** la pendiente (constante, por ser lineal). Una regresión lineal simple tiene solo dos coeficientes.
+- Los coeficientes se estiman por **mínimos cuadrados**: se busca minimizar la suma de los errores al cuadrado entre valores observados y predichos, de modo que la recta pase lo más cerca posible de todos los puntos. β₁ se obtiene a partir de la covarianza entre X e Y dividida por la varianza de X; β₀, a partir de β₁ y las medias de X e Y.
+
+#### <a id="clase-10-supuestos"></a><font color="#9A6700">Supuestos de la regresión lineal</font>
+
+> *⚠️ Retomando lo dicho desde la Clase 1: la estadística tradicional exige supuestos para ser válida e interpretable. Son supuestos estadísticos/matemáticos, no hipótesis sobre el fenómeno.*
+
+Para que el modelo lineal sea confiable se requiere que los errores:
+1. Tengan **media cero**.
+2. Sean **homocedásticos**: para cada punto de la recta, la misma varianza (desconocida).
+3. Tengan **distribución normal**.
+4. Sean **independientes entre sí** y no estén correlacionados con X.
+
+Gráficamente: para cada valor de X, los errores forman una campana de Gauss centrada en la recta. Incumplir los supuestos no descarta el modelo automáticamente ("es un mundo de grises"), pero cuanto mejor se cumplan, más confiables son sus coeficientes y resultados.
+
+#### <a id="clase-10-r2"></a><font color="#1A7F37">Coeficiente de determinación (R²)</font>
+
+- Mide qué tan bien se ajustan los datos a la recta, es decir, la fuerza de la relación entre las variables.
+- Se calcula comparando los valores predichos con los reales: si coinciden, **R² = 1**; cuanto más se alejan, más tiende a **0**.
+- Un R² bajo no implica necesariamente un mal modelo, ni uno alto un modelo excelente: **depende del campo de aplicación**. En ciencias sociales y economía, un modelo con R² alrededor de 0,3–0,4 puede considerarse bueno; en física tradicional o ciencias naturales, un modelo por debajo de 0,9 suele descartarse.
+- La dispersión propia de los datos limita el R² alcanzable incluso cuando se cumplen todos los supuestos: una nube de puntos más dispersa da menor R² sin que eso indique una falla del modelo.
+
+#### <a id="clase-10-multiple"></a><font color="#9A6700">Regresión lineal múltiple</font>
+
+- Con una sola variable predictora la descripción suele ser inadecuada, porque en general son varias las variables que explican la respuesta. Para sumar información al modelar no se agranda la muestra (como en la ley de los grandes números), sino que se **agregan variables predictoras**.
+- Modelo: **Y = β₀ + β₁·X₁ + β₂·X₂ + … + βₙ·Xₙ + e**, con tantos coeficientes como variables independientes.
+- Interpretación: **β₀** es el valor esperado de Y cuando todas las variables independientes valen 0 (puede carecer de sentido práctico, ej. una propiedad de 0 m²). Cada **βᵢ** indica cuánto cambia el valor esperado de Y cuando esa variable aumenta en una unidad, **manteniendo constantes las demás**.
+- **Ejemplo en R con el dataset `mtcars`** (32 modelos de autos de EE.UU., 1973-1974): variable target `mpg` (millas por galón); predictoras: cilindros, caballos de fuerza, peso, tiempo en el cuarto de milla, tipo de motor (`vs`), transmisión (`am`), marchas y carburadores.
+  > *⚠️ Remarcado explícitamente: `vs` y `am` son variables categóricas y hay que indicarlo (`as.factor()`) antes de modelar. No detectarlo y castearlo bien es un error que se nota en los coeficientes y, en el TP final, **es motivo para ir al recuperatorio**, porque los tipos de variables son de los temas más básicos de la materia.*
+  - **Regresión simple** (`mpg ~ peso`): R² = 0,75; coeficiente del peso ≈ −5,3 → por cada 1000 libras más, el auto recorre unas 5,3 millas menos por galón (una relación inversa con magnitud).
+  - **Regresión múltiple** (todas las variables): R² = 0,87. La magnitud del peso baja (≈ −3,7) porque parte de su efecto pasa a otras variables. En variables categóricas el coeficiente se **suma o resta** (no se multiplica): ej. una transmisión manual recorre unas 2,5 millas más por galón que una automática.
+  - **Significatividad:** cuanto más cercano a cero el valor-p de una variable, más útil es; por encima de ~0,1 no suele considerarse. En el ejemplo solo el peso quedó claramente por debajo de ese umbral.
+  - **Modelo reducido** (peso, transmisión y tiempo en el cuarto de milla): R² = 0,85, casi igual al de 10 variables.
+
+#### <a id="clase-10-r2-ajustado"></a><font color="#1A7F37">R² ajustado</font>
+
+- **Penaliza la cantidad de variables** utilizadas: a mayor cantidad de predictoras, mayor penalización. Así, agregar variables que no aportan información real no mejora esta métrica.
+- En el ejemplo: el modelo de 10 variables tiene R² = 0,87 pero un R² ajustado menor que el del modelo de 3 variables (R² = 0,85), lo que sugiere que el modelo más simple puede ser preferible.
+
+#### <a id="clase-10-diagnostico"></a><font color="#1A7F37">Diagnóstico de los supuestos (después de construir el modelo)</font>
+
+- Se realiza **a posteriori** del ajuste (aunque filosóficamente debería hacerse antes) porque se basa en los **residuos**, que solo existen una vez construido el modelo; hoy estimarlos casi no tiene costo computacional.
+- **Apalancamiento (leverage):** detecta si el modelo está muy condicionado por una sola observación o un subconjunto chico de datos. Un valor extremo en el centro de X apenas mueve la pendiente; uno en el extremo de X puede cambiarla drásticamente aunque sea un solo dato entre diez, porque **los mínimos cuadrados (diferencias al cuadrado) son muy sensibles a valores extremos** — la misma razón por la que, para correlación, se usa Spearman en vez de Pearson cuando hay extremos. Existen regresiones *robustas* que mitigan este problema. En el ejemplo, el *Ford Pantera* generó fuerte apalancamiento: siendo liviano y de transmisión manual, recorre pocas millas por galón, contrario a lo que el modelo espera.
+- **QQ-plot:** compara los residuos contra una distribución normal; si los puntos se alinean con la diagonal, se puede asumir normalidad. Alejarse en los extremos o formar una curva indica problemas.
+- **Gráfico de residuos** (observados vs. predichos): permite validar la **homocedasticidad** (varianza constante) y detectar **heterocedasticidad** (la varianza cambia) o **no linealidad** (patrón curvado).
+- Si los supuestos no se cumplen, el modelo no se descarta, pero hay que tomarlo "con pinzas": los coeficientes y su interpretación son menos confiables.
+  > *⚠️ Aplica al TP final: si el objetivo es solo predictivo, el modelo puede usarse igual; si el objetivo es analítico/interpretativo, la confiabilidad de los coeficientes disminuye. En la práctica es difícil que se cumplan perfectamente todos los supuestos, y con datos de ingresos el R² alcanzado nunca será tan alto como el del ejemplo de autos.*
+
+#### <a id="clase-10-arboles"></a><font color="#1A7F37">Regresión mediante árboles de decisión</font>
+
+- Método de aprendizaje supervisado que predice un valor continuo generando **grupos de registros** y asignándoles su **valor promedio**. Para formar los grupos usa métricas de entropía (ej. el coeficiente de Gini).
+- **Ventajas** frente a la regresión lineal: no requiere ningún supuesto y capta relaciones no lineales.
+- **Desventaja:** propenso al **sobreajuste** (ver [Clase 9](#clase-9-arboles-sobreajuste)): memoriza los datos, por lo que con muestras chicas o sesgadas saca conclusiones equivocadas.
+
+#### <a id="clase-10-metricas"></a><font color="#1A7F37">Métricas para comparar modelos de regresión</font>
+
+Permiten comparar modelos de distinta naturaleza (ej. un árbol de decisión contra una regresión lineal):
+- **Error cuadrático medio (MSE):** promedio de las diferencias al cuadrado entre valores predichos y reales.
+- **Error medio absoluto (MAE):** promedio de los valores absolutos de esas diferencias. Está **menos influenciado por valores extremos**, porque no los amplifica al elevar al cuadrado.
 
 </details>
 
